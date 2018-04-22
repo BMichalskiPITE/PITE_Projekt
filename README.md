@@ -44,3 +44,6 @@ ng serve
  
  # travis-ci
  - https://travis-ci.org/BMichalskiPITE/PITE_Projekt
+
+
+<a href='https://coveralls.io/github/HEEEjoO/PITE_Projekt?branch=master'><img src='https://coveralls.io/repos/github/HEEEjoO/PITE_Projekt/badge.svg?branch=master' alt='Coverage Status' /></a>
