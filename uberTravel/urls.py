@@ -19,8 +19,10 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^api/places/$', views.PlaceView.as_view(), name='places-list'),
-    url(r'^api/users/$', views.UserView.as_view(), name='users-list'), 
+    url(r'^api/users/$', views.UserView.as_view(), name='users-list'),
+    url(r'^api/trips/$', views.TripView.as_view(), name='trips-list'), 
     url(r'^api/places/(?P<placeId>.+)/$', views.PlaceRudView.as_view(), name='places-rud'), 
-    url(r'^api/users/(?P<user_id>.+)/$', views.UserRudView.as_view(), name='users-rud'), 
+    url(r'^api/users/(?P<user_id>.+)/$', views.UserRudView.as_view(), name='users-rud'),
+    url(r'^api/trips/(?P<pk>.+)/$', views.TripRudView.as_view(), name='trips-rud'), 
     url(r'^admin/', admin.site.urls),
 ]

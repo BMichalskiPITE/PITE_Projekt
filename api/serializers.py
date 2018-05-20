@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Place,User
+from api.models import Place,User,Trip
 
 class PlaceSerializer(serializers.ModelSerializer):
     url         = serializers.SerializerMethodField(read_only = True)
@@ -45,3 +45,24 @@ class UserSerializer(serializers.ModelSerializer):
         qs = User.objects.filter(user_id__iexact=value)
         if qs.exists():
             raise serializers.ValidationError("This user already exists")
+
+class TripSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Trip
+        fields = [
+        'pk',
+        'userId',
+        'tripName',
+        'tripDescription',
+        'places',
+        'guides'
+        ]
+
+        read_only_fields = ['userId']
+
+    def validate_name(self,value):
+        qs = Trip.objects.filter(tripName__iexact=value).filter(userId__iexact=value)
+        if self.instance:
+            qs = qs.exclude(pk = self.instance.pk)
+        if qs.exists():
+            raise serializers.ValidationError("This trip already exists")

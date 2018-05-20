@@ -36,8 +36,8 @@ class UserView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)"""
 
 from rest_framework import generics, mixins
-from api.models import Place, User
-from api.serializers import PlaceSerializer,UserSerializer
+from api.models import Place, User, Trip
+from api.serializers import PlaceSerializer,UserSerializer, TripSerializer
 from django.db.models import Q
 
 class PlaceView(mixins.CreateModelMixin, generics.ListAPIView):
@@ -77,6 +77,20 @@ class UserView(mixins.CreateModelMixin, generics.ListAPIView):
     def get_serializer_context(self, *args, **kwargs):
         return {"request": self.request}
 
+class TripView(mixins.CreateModelMixin, generics.ListAPIView):
+    pass
+    lookup_field = 'pk'
+    serializer_class = TripSerializer
+
+    def get_queryset(self):
+        qs = Trip.objects.all()
+        query = self.request.GET.get("q")
+        if query is not None:
+            qs = qs.filter(Q(tripName__icontains=query))
+        return qs
+
+    def post(self,request,*args,**kwargs):
+        return self.create(request, *args, **kwargs)
 
 class PlaceRudView(generics.RetrieveUpdateDestroyAPIView):
     pass
@@ -99,3 +113,11 @@ class UserRudView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_serializer_context(self, *args, **kwargs):
         return {"request": self.request}
+
+class TripRudView(generics.RetrieveUpdateDestroyAPIView):
+    pass
+    lookup_field = 'pk'
+    serializer_class = TripSerializer
+
+    def get_queryset(self):
+        return Trip.objects.all()
