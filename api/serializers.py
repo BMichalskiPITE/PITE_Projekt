@@ -1,6 +1,5 @@
-from api.models import Place,User
 from rest_framework import serializers
-
+from api.models import Place,User
 
 class PlaceSerializer(serializers.ModelSerializer):
     url         = serializers.SerializerMethodField(read_only = True)
@@ -15,7 +14,6 @@ class PlaceSerializer(serializers.ModelSerializer):
             'latitude',
             'longitude'
             ]
-        read_only_fields = ['placeId']
 
     def get_url(self,obj):
         request = self.context.get("request")
@@ -26,7 +24,7 @@ class PlaceSerializer(serializers.ModelSerializer):
         if self.instance:
             qs = qs.exclude(placeId = self.instance.placeId)
         if qs.exists():
-            raise serializers.ValidationError("The place is already here")
+            raise serializers.ValidationError("This place already exists")
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -34,11 +34,31 @@ class PlaceTestCase(APITestCase):
         place_count = Place.objects.count()
         self.assertEqual(place_count, 1)
 
-    def test_get_list(self):
+    def test_get_list_place(self):
         data = {}
         url = reverse("places-list")
         response = self.client.get(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_item_place(self):
+        place = Place.objects.first()
+        data = {}
+        url = place.get_api_url()
+        response = self.client.get(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_update_place(self):
+        place = Place.objects.first()
+        data = {'name':'rand', "photoRef": "ffhsf", "placeId": "348794", "vicinty": "rynek glowny", "latitude": 20, "longitude": 50}
+        url = place.get_api_url()
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_post_item_place(self):
+        data = {'name': 'rando place', 'photoRef':'s3e3982', "placeId": "348794", 'vicinty': 'tesei 2', 'latitude':21, 'longitude':45}
+        url = reverse("places-list")
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_get_list_user(self):
         data = {}
@@ -46,9 +66,24 @@ class PlaceTestCase(APITestCase):
         response = self.client.get(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    """def test_get_status_code_is_200(self):
-        client = APIClient()
-        response = client.get('/api/places/')
-        print(response)
-        self.assertTrue(response.status_code == 200,'Incorrect response status code {0}'.format(response.status_code))"""
+    def test_get_item_user(self):
+        user = User_model.objects.first()
+        data = {}
+        url = user.get_api_url()
+        response = self.client.get(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_update_user(self):
+        user = User_model.objects.first()
+        data = {'user_id':'344034sf', 'is_guide':True}
+        url = user.get_api_url()
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_post_item_user(self):
+        data = {"user_id" : "4230", "is_guide": False}
+        url = reverse("users-list")
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
 

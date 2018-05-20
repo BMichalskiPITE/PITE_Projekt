@@ -76,28 +76,7 @@ class UserView(mixins.CreateModelMixin, generics.ListAPIView):
 
     def get_serializer_context(self, *args, **kwargs):
         return {"request": self.request}
-    """def get(self, request, user_id):
-        try:
-            user = User.objects.get(user_id=user_id)
-        except User.DoesNotExist:
-            user = User(user_id=user_id,is_guide=False)
-            user.save()
-            
-        return Response(UserSerializer(user).data)
 
-    def put(self, request, user_id):
-        try:
-            user = User.objects.get(user_id=user_id)
-        except User.DoesNotExist:
-            user = User(user_id=user_id,is_guide=False)
-            user.save()
-
-        serializer = UserSerializer(user, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)"""
 
 class PlaceRudView(generics.RetrieveUpdateDestroyAPIView):
     pass
