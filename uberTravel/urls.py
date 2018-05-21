@@ -13,16 +13,18 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from api import views
+from place import views as views_p
+from user import views as views_u
+from trip import views as views_t
 from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^api/places/$', views.PlaceView.as_view(), name='places-list'),
-    url(r'^api/users/$', views.UserView.as_view(), name='users-list'),
-    url(r'^api/trips/$', views.TripView.as_view(), name='trips-list'), 
-    url(r'^api/places/(?P<placeId>.+)/$', views.PlaceRudView.as_view(), name='places-rud'), 
-    url(r'^api/users/(?P<user_id>.+)/$', views.UserRudView.as_view(), name='users-rud'),
-    url(r'^api/trips/(?P<pk>.+)/$', views.TripRudView.as_view(), name='trips-rud'), 
+    url(r'^api/places/$', views_p.PlaceView.as_view(), name='places-list'),
+    url(r'^api/users/$', views_u.UserView.as_view(), name='users-list'),
+    url(r'^api/trips/$', views_t.TripView.as_view(), name='trips-list'), 
+    url(r'^api/places/(?P<placeId>.+)/$', views_p.PlaceRudView.as_view(), name='places-rud'), 
+    url(r'^api/users/(?P<user_id>.+)/$', views_u.UserRudView.as_view(), name='users-rud'),
+    url(r'^api/trips/(?P<pk>.+)/$', views_t.TripRudView.as_view(), name='trips-rud'), 
     url(r'^admin/', admin.site.urls),
 ]
