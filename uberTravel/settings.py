@@ -32,9 +32,9 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'ubertravel.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = (
-    'place',
-    'user',
-    'trip',
+    'place.apps.PlaceConfig',
+    'user.apps.UserConfig',
+    'trip.apps.TripConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
