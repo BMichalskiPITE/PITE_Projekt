@@ -32,7 +32,9 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'ubertravel.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = (
-    'api.apps.ApiConfig',
+    'place',
+    'user',
+    'trip',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +45,17 @@ INSTALLED_APPS = (
     'rest_framework',
     'corsheaders'
 )
+
+"""REST_FRAMEWORK = { 
+    'DEFAULT_PERMISSION_CLASSES': ( 
+    'rest_framework.permissions.IsAuthenticatedOrReadOnly', 
+    ), 
+    'DEFAULT_AUTHENTICATION_CLASSES': ( 
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication', 
+        'rest_framework.authentication.SessionAuthentication', 
+        'rest_framework.authentication.BasicAuthentication', 
+    ), 
+}"""
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
