@@ -63,6 +63,15 @@ export class TripDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+    selectGuide(guide):void{
+      let updateGuide = this.details.guides.find(this.findIndexToUpdate, guide.id)
+      let index = this.details.guides.indexOf(updateGuide);
+       this.details.guides[index].selected = true;
+    }
+
+    findIndexToUpdate(newItem) { 
+        return newItem.id === this;
+    }
 
     ngOnInit() {
       this.sub = this.activate.params.subscribe(params => {
@@ -74,18 +83,5 @@ export class TripDetailsComponent implements OnInit, OnDestroy {
       this.sub.unsubscribe();
     }
 
-    selectGuide(guide):void{
-      //this.id = details.guides.find(guide => guide.id === id)
-      //details.guides[this.id].selected = true;
-      let updateGuide = this.details.guides.find(this.findIndexToUpdate, guide.id)
-      let index = this.details.guides.indexOf(updateGuide);
-       this.details.guides[index].selected = true;
-
-      //this.details.guides[0].selected=true;
-    }
-
-    findIndexToUpdate(newItem) { 
-        return newItem.id === this;
-  }
   
 }
