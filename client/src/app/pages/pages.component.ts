@@ -41,16 +41,28 @@ export class PagesComponent implements OnInit, OnDestroy {
     const isLogged = !!user;
     console.log("isLogged" + isLogged);
     const roles = isLogged ? user.roles : [];
+    console.log(user)
     for(const item of this.menu) {
       this.updateItem(item, isLogged, roles);
     }
   }
 
   private hasRole(roles: Array<string>, roleName: string): boolean {
-    return !!roles.find(e => e === roleName);
+    return roles.findIndex(e => e === roleName) !== -1;
   } 
 
   private updateItem( item: NbMenuItem, isLogged: boolean, roles: Array<string>):void {
+    console.log(roles)
+    if(!isLogged){
+      if(item.title == "Dashboard"){
+        item.hidden = false;
+        return;
+      }
+      item.hidden = true;
+      if(item.children){
+        item.children.forEach(e => this.updateItem(e, isLogged, roles));
+      }
+    } else
     if(this.hasRole(roles, 'admin')){
       item.hidden = false;
       if(item.children){
@@ -60,13 +72,19 @@ export class PagesComponent implements OnInit, OnDestroy {
       const role = roles.find(r => {
         return item.data.permission.findIndex(a => a === r) != -1;
       });
-      if(role){
+      if(role !== undefined){
         item.hidden = false;
       } else {
         item.hidden = true;
       }
+      if(item.children){
+        item.children.forEach(e => this.updateItem(e, isLogged, roles));
+      }
     } else {
       item.hidden = false;
+      if(item.children){
+        item.children.forEach(e => this.updateItem(e, isLogged, roles));
+      }
     }
   }
 }

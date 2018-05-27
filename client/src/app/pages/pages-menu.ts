@@ -10,6 +10,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Tourist',
     icon: 'nb-location',
+    data: {
+      permission: [
+        'tourist'
+      ],
+    },
     children: [
       {
         title: 'Your trips',
@@ -36,6 +41,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Guide',
     icon: 'nb-location',
+    data: {
+      permission: [
+        'tourist'
+      ],
+    },
     children: [
       {
         title: 'Find trips',

@@ -23,11 +23,11 @@ export class MapComponent implements OnInit {
 
   showPlaces() {
     this.placesService.getPlaces()
-      .subscribe(
+      .then(
         data => { 
         console.log(data);
         this.places = data;
-      },
+      }).catch(
       error => alert('Error when loading data: ' + JSON.stringify(error))
     );
   }

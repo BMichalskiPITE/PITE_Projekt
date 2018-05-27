@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Place } from '../../../place';
+import { RestService } from '../../../shared/rest.service';
+import { AuthService } from '../../../shared/auth.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'add-trip',
   templateUrl: './addTrip.component.html',
@@ -9,7 +13,7 @@ export class AddTripComponent implements OnInit {
 
     selectedPlaces:Place[] = [];
     ids:String[] = []
-    constructor() { }
+    constructor(private rest:RestService, private auth:AuthService, private router:Router) { }
     tripName = ""
     tripDescription = ""
     ngOnInit() {
@@ -33,6 +37,14 @@ export class AddTripComponent implements OnInit {
       this.ids = this.selectedPlaces.map(p => p.placeId);
   }
   registerTrip():void {
-      console.log(this.selectedPlaces);
+      console.log("sggs")
+      this.rest.addTrip({
+          userId: this.auth.getLoggedUser().id,
+          tripName: this.tripName,
+          tripDescription: this.tripDescription,
+          places: this.ids
+      }).then(i => {
+          this.router.navigate(['/tourist/tripDetails/'+i.tripId]);
+        })
   }
 }

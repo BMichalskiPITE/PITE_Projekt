@@ -11,7 +11,8 @@ export class SharedModule {
             ngModule: SharedModule,
             providers: [
                 GlobalState,
-                AuthService
+                AuthService,
+                RestService
             ]
         }
     }
