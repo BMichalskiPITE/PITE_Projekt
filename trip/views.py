@@ -1,11 +1,12 @@
-from rest_framework import generics, mixins
+from rest_framework import generics, mixins, status
+from rest_framework.decorators import api_view
 from .models import Trip
-from .forms import TripForm, AllTripsGetForm
+from user.models import User
+from .forms import TripForm, AnnounceTripForm
 from .serializers import TripSerializer
 from django.db.models import Q
 from django.http import JsonResponse
 from django.core import serializers
-
 
 class TripView(mixins.CreateModelMixin, generics.ListAPIView):
     lookup_field = 'pk'
@@ -44,3 +45,33 @@ class TripRudView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_serializer_context(self, *args, **kwargs):
         return {"request": self.request}
+
+
+@api_view(['GET','POST'])
+def trip_announce_list(request, format = None):
+
+    if request.method == 'POST':
+        trip = Trip.objects.all()
+        guide = User.objects.all()
+        form = AnnounceTripForm(request.data)
+        if form.is_valid():
+            trip = trip.filter(Q(id__icontains=form.clean_tripId()))
+            if trip.count() > 0:
+                trip = trip[0]
+            else:
+                return JsonResponse({'form': form.errors}, status=422)
+            guide = guide.filter(Q(id__icontains=form.clean_userId()))
+            if guide.count() > 0:
+                guide = guide[0]
+            else:
+                return JsonResponse({'form': form.errors}, status=422)
+            if guide.is_guide is False:
+                return JsonResponse({'form': form.errors}, status=422)
+            trip.save()
+            trip.guides.add(guide)
+            serializer = TripSerializer(trip)
+            return JsonResponse(serializer.data, safe = False)
+    if request.method == 'GET':
+        trips = Trip.objects.filter(guides=None)
+        serializer = TripSerializer(trips, many = True)
+        return JsonResponse(serializer.data, safe = False)
