@@ -39,6 +39,13 @@ class PlaceTestCase(APITestCase):
             )
         trip.places.add(place)
 
+        trip2 = Trip.objects.create(
+            userId = '13',
+            tripName = 'another random trip',
+            tripDescription = 'decsription',
+            )
+        trip2.places.add(place)
+        trip2.guides.add(user_m)
     def test_add_item_trip(self):
         data = {
             'userId' : '13',
@@ -50,9 +57,23 @@ class PlaceTestCase(APITestCase):
         }
         url = reverse("trips-list")
         response = self.client.post(url, data, format='json')
-        self.assertJSONEqual(str(response.content,encoding='utf8'),{'tripId': 2})
+        self.assertJSONEqual(str(response.content,encoding='utf8'),{'tripId': 3})
         self.assertEqual(response.status_code,200)
 
     def test_get_all_items_per_user_trip(self):
         response = self.client.get('/api/trips/?userid=13')
 
+    def test_get_announce_list(self):
+        data = {}
+        url = reverse('trip-announces')
+        response = self.client.get(url,data,format='json')
+        self.assertEqual(response.status_code,200)
+
+    def test_post_announce(self):
+        data = {
+            'userId' : '24f',
+            'tripId' : 1,
+        }
+        url = reverse('trip-announces')
+        response = self.client.post(url,data,format='json')
+        self.assertEqual(response.status_code,200)
