@@ -24,11 +24,11 @@ class PlaceTestCase(APITestCase):
             )
 
         user_m = User_model.objects.create(
-            user_id = '24f',
+            id = '24f',
             is_guide = True
             )
         user_tourist = User_model.objects.create(
-            user_id = '13',
+            id = '13',
             is_guide = False
             )
 

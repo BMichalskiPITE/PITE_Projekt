@@ -16,7 +16,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('user_id', models.CharField(max_length=200, primary_key=True, serialize=False)),
+                ('id', models.CharField(max_length=200, primary_key=True, serialize=False)),
+                ('username', models.CharField(max_length=200, default = "None")),
+                ('mail', models.CharField(max_length=200, default = "None")),
+                ('imageUrl', models.CharField(max_length=500, default = "None")),
                 ('is_guide', models.BooleanField(default=False)),
             ],
         ),

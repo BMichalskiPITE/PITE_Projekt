@@ -40,14 +40,14 @@ from django.core import serializers
 
 class UserView(mixins.CreateModelMixin, generics.ListAPIView):
     pass
-    lookup_field        = 'user_id'
+    lookup_field        = 'id'
     serializer_class    = UserSerializer
     
     def get_queryset(self):
         qs = User.objects.all()
         query = self.request.GET.get("q")
         if query is not None:
-            qs = qs.filter(Q(user_id__icontains=query))
+            qs = qs.filter(Q(id__icontains=query))
         return qs
 
     def post(self,request,*args,**kwargs):
@@ -59,7 +59,7 @@ class UserView(mixins.CreateModelMixin, generics.ListAPIView):
 
 class UserRudView(generics.RetrieveUpdateDestroyAPIView):
     pass
-    lookup_field        = 'user_id'
+    lookup_field        = 'id'
     serializer_class = UserSerializer
     
     def get_queryset(self):

@@ -13,11 +13,11 @@ class PlaceTestCase(APITestCase):
         user.save()
 
         user_m = User_model.objects.create(
-            user_id = '24f',
+            id = '24f',
             is_guide = True
             )
         user_tourist = User_model.objects.create(
-            user_id = '13',
+            id = '13',
             is_guide = False
             )
 
@@ -40,13 +40,13 @@ class PlaceTestCase(APITestCase):
 
     def test_get_update_user(self):
         user = User_model.objects.first()
-        data = {'user_id':'344034sf', 'is_guide':True}
+        data = {'id':'344034sf', 'is_guide':True}
         url = user.get_api_url()
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_post_item_user(self):
-        data = {"user_id" : "4230", "is_guide": False}
+        data = {"id" : "4230", "is_guide": False}
         url = reverse("users-list")
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

@@ -7,7 +7,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
         'url',
-        'user_id',
+        'id',
+        'username',
+        'mail',
+        'imageUrl',
         'is_guide'
         ]
 
@@ -16,6 +19,6 @@ class UserSerializer(serializers.ModelSerializer):
         return obj.get_api_url(request=request)
 
     def validate_name(self,value):
-        qs = User.objects.filter(user_id__iexact=value)
+        qs = User.objects.filter(id__iexact=value)
         if qs.exists():
             raise serializers.ValidationError("This user already exists")
