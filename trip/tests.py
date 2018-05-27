@@ -74,6 +74,6 @@ class PlaceTestCase(APITestCase):
             'userId' : '24f',
             'tripId' : 1,
         }
-        url = reverse('trip-announces')
+        url = reverse('trip-announcements')
         response = self.client.post(url,data,format='json')
         self.assertEqual(response.status_code,200)
