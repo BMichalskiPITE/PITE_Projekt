@@ -11,7 +11,9 @@ class UserSerializer(serializers.ModelSerializer):
         'username',
         'mail',
         'imageUrl',
-        'is_guide'
+        'is_guide',
+        'gradesNumber',
+        'gradesSum'
         ]
 
     def get_url(self,obj):

@@ -9,6 +9,8 @@ class Trip(models.Model):
     tripDescription = models.CharField(max_length=500, default="None")
     places = models.ManyToManyField(Place)
     guides = models.ManyToManyField(User)
+    declaredGuide = models.CharField(max_length = 200, default = "None")
+    isDeclared = models.BooleanField(default = False)
 
     def __str__(self):
         return str(self.tripName)
