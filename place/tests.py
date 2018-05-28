@@ -55,7 +55,7 @@ class PlaceTestCase(APITestCase):
         data = {'name': 'rando place', 'photoRef':'s3e3982', "placeId": "348794", 'vicinty': 'tesei 2', 'latitude':21, 'longitude':45}
         url = reverse("places-list")
         response = self.client.post(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_apps(self):
         self.assertEqual(PlaceConfig.name,'place')
