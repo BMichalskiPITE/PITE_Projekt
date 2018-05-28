@@ -5,6 +5,7 @@ from .models import Place
 from rest_framework.reverse import reverse
 from .apps import PlaceConfig
 from django.apps import apps
+from .serializers import PlaceSerializer
 
 User = get_user_model()
 
@@ -59,3 +60,28 @@ class PlaceTestCase(APITestCase):
     def test_apps(self):
         self.assertEqual(PlaceConfig.name,'place')
         self.assertEqual(apps.get_app_config('place').name, 'place')
+
+    def test_wrong_validation(self):
+        data = {
+            'name' : 'Kraków Barbican',
+            'photoRef' : 'rwru0',
+            'placeId' : 'er2rweu',
+            'vicinty' : 'Basztowa, Kraków',
+            'latitude' : 50.0654718,
+            'longitude' : 19.9416613
+        }
+        serializer = PlaceSerializer(data=data)
+        self.assertEqual(serializer.is_valid(), False)
+        self.assertEqual(set(serializer.errors.keys()), set(['name']))
+
+    def test_correct_validation(self):
+        data = {
+            'name' : 'Barbican',
+            'photoRef' : 'rwru0',
+            'placeId' : 'er2rweu',
+            'vicinty' : 'Basztowa, Kraków',
+            'latitude' : 50.0654718,
+            'longitude' : 19.9416613
+        }
+        serializer = PlaceSerializer(data=data)
+        self.assertEqual(serializer.is_valid(), True)
