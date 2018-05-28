@@ -26,6 +26,6 @@ urlpatterns = [
     url(r'^api/places/(?P<placeId>.+)/$', place_views.PlaceRudView.as_view(), name='places-rud'), 
     url(r'^api/users/(?P<id>.+)/$', user_views.UserRudView.as_view(), name='users-rud'),
     url(r'^api/trips/(?P<pk>.+)/$', trip_views.TripRudView.as_view(), name='trips-rud'),
-    url(r'^api/announces/$', trip_views.trip_announce_list, name='trip-announces'),
+    url(r'^api/announcements/$', trip_views.trip_announce_list, name='trip-announcements'),
     url(r'^admin/', admin.site.urls),
 ]
