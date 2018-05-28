@@ -11,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         'username',
         'mail',
         'imageUrl',
+        'is_guide',
         'gradesNumber',
         'gradesSum'
         ]
