@@ -46,7 +46,7 @@ class TripRudView(generics.RetrieveUpdateDestroyAPIView):
         return {"request": self.request}
 
 
-@api_view(['GET','POST'])
+@api_view(['GET','POST','DELETE'])
 def trip_announce_list(request, format = None):
 
     if request.method == 'POST':
@@ -58,19 +58,41 @@ def trip_announce_list(request, format = None):
             if trip.count() > 0:
                 trip = trip[0]
             else:
-                return JsonResponse({'form': form.errors}, status=422)
+                return JsonResponse({'form': 'no trips with this ID'}, status=422)
             guide = guide.filter(Q(id__icontains=form.clean_userId()))
             if guide.count() > 0:
                 guide = guide[0]
             else:
-                return JsonResponse({'form': form.errors}, status=422)
+                return JsonResponse({'form': 'no guides with this ID'}, status=422)
             if guide.is_guide is False:
-                return JsonResponse({'form': form.errors}, status=422)
+                return JsonResponse({'form': 'this user is not a guide'}, status=422)
             trip.save()
             trip.guides.add(guide)
             serializer = TripSerializer(trip)
             return JsonResponse(serializer.data, safe = False)
+
     if request.method == 'GET':
         trips = Trip.objects.filter(guides=None)
         serializer = TripSerializer(trips, many = True)
         return JsonResponse(serializer.data, safe = False)
+
+    if request.method == 'DELETE':
+        trip = Trip.objects.all()
+        guide = User.objects.all()
+        form = AnnounceTripForm(request.data)
+        if form.is_valid():
+            trip = trip.filter(Q(id__icontains=form.clean_tripId()))
+            if trip.count() > 0:
+                trip = trip[0]
+            else:
+                return JsonResponse({'form': 'no trips with this ID'}, status=422)
+            guide = guide.filter(Q(id__icontains=form.clean_userId()))
+            if guide.count() > 0:
+                guide = guide[0]
+            else:
+                return JsonResponse({'form': 'no giudes with this ID'}, status=422)
+            if trip.filter(guides__id__contains = form.clean_userId()).count() == 0:
+                return JsonResponse({'form': 'this giude is not ordered to the trip'}, status=422)
+            trip.guides.remove(guide)
+            serializer = TripSerializer(trip)
+            return JsonResponse(serializer.data, safe=True)
