@@ -3,6 +3,8 @@ from rest_framework.test import APIRequestFactory,APIClient,APITestCase
 from django.contrib.auth import get_user_model
 from .models import User as User_model
 from rest_framework.reverse import reverse
+from .apps import UserConfig
+from django.apps import apps
 
 User = get_user_model()
 
@@ -50,3 +52,7 @@ class PlaceTestCase(APITestCase):
         url = reverse("users-list")
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_apps(self):
+        self.assertEqual(UserConfig.name,'user')
+        self.assertEqual(apps.get_app_config('user').name, 'user')

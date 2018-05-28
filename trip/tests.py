@@ -6,6 +6,8 @@ from user.models import User as User_model
 from .models import Trip
 from rest_framework.reverse import reverse
 from .views import TripView
+from .apps import TripConfig
+from django.apps import apps
 
 User = get_user_model()
 
@@ -77,3 +79,7 @@ class PlaceTestCase(APITestCase):
         url = reverse('trip-announces')
         response = self.client.post(url,data,format='json')
         self.assertEqual(response.status_code,200)
+
+    def test_apps(self):
+        self.assertEqual(TripConfig.name,'trip')
+        self.assertEqual(apps.get_app_config('trip').name, 'trip')
