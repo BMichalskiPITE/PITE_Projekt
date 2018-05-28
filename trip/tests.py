@@ -72,7 +72,7 @@ class PlaceTestCase(APITestCase):
 
     def test_get_announce_list(self):
         data = {}
-        url = reverse('trip-announcements')
+        url = reverse('trip-orders')
         response = self.client.get(url,data,format='json')
         self.assertEqual(response.status_code,200)
 
@@ -81,7 +81,7 @@ class PlaceTestCase(APITestCase):
             'userId' : '24f',
             'tripId' : 1,
         }
-        url = reverse('trip-announcements')
+        url = reverse('trip-orders')
         response = self.client.post(url,data,format='json')
         self.assertEqual(response.status_code,200)
 
