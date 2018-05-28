@@ -5,6 +5,7 @@ from .models import User as User_model
 from rest_framework.reverse import reverse
 from .apps import UserConfig
 from django.apps import apps
+from .serializers import UserSerializer
 
 User = get_user_model()
 
@@ -61,3 +62,22 @@ class PlaceTestCase(APITestCase):
     def test_apps(self):
         self.assertEqual(UserConfig.name,'user')
         self.assertEqual(apps.get_app_config('user').name, 'user')
+
+    def test_wrong_validation(self):
+        data = {
+            'id' : '24f',
+            'username' : 'user2',
+            'is_guide' : False
+        }
+        serializer = UserSerializer(data=data)
+        self.assertEqual(serializer.is_valid(), False)
+        self.assertEqual(set(serializer.errors.keys()), set(['id']))
+
+    def test_correct_validation(self):
+        data = {
+            'id' : '34ic3rmi',
+            'username' : 'user2',
+            'is_guide' : False
+        }
+        serializer = UserSerializer(data=data)
+        self.assertEqual(serializer.is_valid(), True)
