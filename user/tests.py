@@ -25,7 +25,7 @@ class PlaceTestCase(APITestCase):
             )
 
     def test_str_method(self):
-        user_test = User.objects.get(pk = 1)
+        user_test = User.objects.get(pk=1)
         self.assertEqual(str(user_test), user_test.username)
 
     def test_single_user(self):

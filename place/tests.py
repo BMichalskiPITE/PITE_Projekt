@@ -21,9 +21,10 @@ class PlaceTestCase(APITestCase):
             latitude= 50.0654718,
             longitude=19.9416613
             )
+        
     def test_str_method(self):
         place = Place.objects.get(placeId = 'ChIJjUf7MRBbFkcRg9Ls9752tqU')
-        self.assertEqual(str(place), place.name)
+        self.assertEqual(str(place), place.name) 
 
     def test_single_place(self):
         place_count = Place.objects.count()
