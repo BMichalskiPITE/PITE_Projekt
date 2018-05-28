@@ -13,7 +13,9 @@ class TripSerializer(serializers.ModelSerializer):
         'tripName',
         'tripDescription',
         'places',
-        'guides'
+        'guides',
+        'declaredGuide',
+        'isDeclared'
         ]
 
 

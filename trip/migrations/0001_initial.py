@@ -24,6 +24,8 @@ class Migration(migrations.Migration):
                 ('tripDescription', models.CharField(max_length=500, default="None")),
                 ('guides', models.ManyToManyField(to='user.User')),
                 ('places', models.ManyToManyField(to='place.Place'),),
+                ('declaredGuide', models.CharField(default='None', max_length=200)),
+                ('isDeclared', models.BooleanField(default = False)),
             ],
         ),
     ]

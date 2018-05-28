@@ -21,6 +21,8 @@ class Migration(migrations.Migration):
                 ('mail', models.CharField(max_length=200, default = "None")),
                 ('imageUrl', models.CharField(max_length=500, default = "None")),
                 ('is_guide', models.BooleanField(default=False)),
+                ('gradesNumber', models.IntegerField(default = 0)),
+                ('gradesSum', models.IntegerField(default = 0))
             ],
         ),
     ]
