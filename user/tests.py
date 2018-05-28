@@ -16,12 +16,17 @@ class PlaceTestCase(APITestCase):
 
         user_m = User_model.objects.create(
             id = '24f',
+            username = 'user1',
             is_guide = True
             )
         user_tourist = User_model.objects.create(
             id = '13',
             is_guide = False
             )
+
+    def test_str_method(self):
+        user_test = User.objects.get(pk=1)
+        self.assertEqual(str(user_test), user_test.username)
 
     def test_single_user(self):
         user_count = User.objects.count()

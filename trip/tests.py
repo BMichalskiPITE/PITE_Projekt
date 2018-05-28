@@ -48,6 +48,11 @@ class PlaceTestCase(APITestCase):
             )
         trip2.places.add(place)
         trip2.guides.add(user_m)
+
+    def test_str_method(self):
+        trip = Trip.objects.get(pk = 1) 
+        self.assertEqual(str(trip), trip.tripName)
+
     def test_add_item_trip(self):
         data = {
             'userId' : '13',

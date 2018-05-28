@@ -10,7 +10,7 @@ class User(models.Model):
     is_guide = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.username) 
 
     def get_api_url(self, request = None):
         return reverse("users-rud", kwargs ={'id': self.id}, request = request)
