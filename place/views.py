@@ -2,6 +2,8 @@ from rest_framework import generics, mixins
 from .models import Place
 from .serializers import PlaceSerializer
 from django.db.models import Q
+from .forms import PlaceForm
+from django.http import JsonResponse
 
 class PlaceView(mixins.CreateModelMixin, generics.ListAPIView):
     lookup_field        = 'placeId'
@@ -15,7 +17,14 @@ class PlaceView(mixins.CreateModelMixin, generics.ListAPIView):
         return qs
 
     def post(self,request,*args,**kwargs):
-        return self.create(request, *args, **kwargs)
+        form = PlaceForm(request.data)
+        if form.is_valid():
+            place = form.save()
+            place.name = form.clean_name()
+            place.save()
+            serializer = PlaceSerializer(place)
+            return JsonResponse(serializer.data, safe = False)
+        return JsonResponse({'place':'not allowed formula'}, status=422)
 
     def get_serializer_context(self, *args, **kwargs):
         return {"request": self.request}

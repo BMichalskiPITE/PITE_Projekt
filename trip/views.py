@@ -36,7 +36,6 @@ class TripView(mixins.CreateModelMixin, generics.ListAPIView):
         return {"request": self.request}
 
 class TripRudView(generics.RetrieveUpdateDestroyAPIView):
-    pass
     lookup_field = 'pk'
     serializer_class = TripSerializer
 
