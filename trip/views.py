@@ -2,7 +2,7 @@ from rest_framework import generics, mixins, status
 from rest_framework.decorators import api_view
 from .models import Trip
 from user.models import User
-from .forms import TripForm, AnnounceTripForm
+from .forms import TripForm, AnnounceTripForm, AcceptTripForm
 from .serializers import TripSerializer
 from django.db.models import Q
 from django.http import JsonResponse
@@ -68,11 +68,12 @@ def trip_announce_list(request, format = None):
                 return JsonResponse({'form': 'this user is not a guide'}, status=422)
             trip.save()
             trip.guides.add(guide)
+            trip.save()
             serializer = TripSerializer(trip)
             return JsonResponse(serializer.data, safe = False)
 
     if request.method == 'GET':
-        trips = Trip.objects.filter(guides=None)
+        trips = Trip.objects.filter(declaredGuide = "None")
         serializer = TripSerializer(trips, many = True)
         return JsonResponse(serializer.data, safe = False)
 
@@ -94,5 +95,51 @@ def trip_announce_list(request, format = None):
             if trip.guides.filter(Q(id__icontains = form.clean_userId())).count() == 0:
                 return JsonResponse({'form': 'this giude is not ordered to the trip'}, status=422)
             trip.guides.remove(guide)
+            trip.save()
             serializer = TripSerializer(trip)
             return JsonResponse(serializer.data, safe=True)
+
+@api_view(['POST','DELETE'])
+def trip_acceptation_list(request, format = None):
+
+    if request.method == 'POST':
+        form = AcceptTripForm(request.data)
+        if form.is_valid():
+            trip = Trip.objects.filter(Q(id__icontains=form.clean_tripId()))
+            if trip.count() == 1:
+                trip = trip[0]
+            else: return JsonResponse({'form' : 'no trips with this ID'}, status = 422)    
+            if trip.userId != form.clean_userId() : return JsonResponse({'form' : 'this trip does not belong to the user'}, status=422)
+            if trip.guides.filter(Q(id__icontains = form.clean_guideId())).count() == 0:
+                return JsonResponse({'form': 'this giude is not ordered to the trip'}, status=422)
+            trip.isDeclared = True
+            trip.declaredGuide = form.clean_guideId()
+            trip.save()
+            serializer = TripSerializer(trip)
+            return JsonResponse(serializer.data, safe=True)
+        else: return JsonResponse({'form' : 'bad formula'}, status=422)
+
+    if request.method == 'DELETE':
+        form = AcceptTripForm(request.data) 
+        if form.is_valid():
+            trip = Trip.objects.filter(Q(id__icontains=form.clean_tripId()))
+            if trip.count() == 1:
+                trip = trip[0]
+            else: 
+                return JsonResponse({'form' : 'no trips with this ID'}, status = 422)    
+            if trip.userId != form.clean_userId() : 
+                return JsonResponse({'form' : 'this trip does not belong to the user'}, status=422)
+            if trip.declaredGuide != form.clean_guideId():
+                return JsonResponse({'form': 'this giude is not declared to the trip'}, status=422)
+            guide = User.objects.filter(Q(id__icontains=form.clean_guideId()))
+            guide = guide[0]
+            trip.isDeclared = False
+            trip.declaredGuide = "None"
+            trip.guides.remove(guide)
+            trip.save()
+            serializer = TripSerializer(trip)
+            return JsonResponse(serializer.data, safe=True)
+        else: 
+            return JsonResponse({'form' : 'bad formula'}, status=422)
+
+

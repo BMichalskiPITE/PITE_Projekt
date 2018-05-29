@@ -48,7 +48,6 @@ class PlaceTestCase(APITestCase):
             )
         trip2.places.add(place)
         trip2.guides.add(user_m)
-
     def test_str_method(self):
         trip = Trip.objects.get(pk = 1) 
         self.assertEqual(str(trip), trip.tripName)
@@ -97,28 +96,159 @@ class PlaceTestCase(APITestCase):
         response = self.client.delete(url,data,format = 'json')
         self.assertEqual(response.status_code,422)
         self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'this giude is not ordered to the trip'})
+
+    def test_delete_announce_wrong_userid(self):
         data = {
             'userId' : '13',
             'tripId' : 1,
         }
+        url = reverse('trip-orders')
         response = self.client.delete(url,data,format = 'json')
         self.assertEqual(response.status_code,422)
         self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'this giude is not ordered to the trip'})
+        
+    def test_delete_announce_wrong_userid_2(self):
         data = {
             'userId' : '14f53',
             'tripId' : 1,
         }
+        url = reverse('trip-orders')
         response = self.client.delete(url,data,format = 'json')
         self.assertEqual(response.status_code,422)
         self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'no giudes with this ID'})
+        
+    def test_delete_announce_wrong_tripid(self):
         data = {
             'userId' : '13',
             'tripId' : 123,
         }
+        url = reverse('trip-orders')
         response = self.client.delete(url,data,format = 'json')
         self.assertEqual(response.status_code,422)
         self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'no trips with this ID'})
  
+    def test_post_accept(self):
+        data = {
+            'userId' : '13',
+            'tripId' : 2,
+            'guideId' : '24f',
+        }
+        url = reverse('trip-acceptations')
+        response = self.client.post(url,data,format = 'json')
+        self.assertEqual(response.status_code,200)
+
+    def test_post_accept_wrong_tripid(self):
+        data = {
+            'userId' : '13',
+            'tripId' : 4824,
+            'guideId' : '24f',
+        }
+        url = reverse('trip-acceptations')
+        response = self.client.post(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'no trips with this ID'})
+
+
+    def test_post_accept_wrong_tripid_or_userid(self):
+        data = {
+            'userId' : '24f',
+            'tripId' : 2,
+            'guideId' : '24f',
+        }
+        url = reverse('trip-acceptations')
+        response = self.client.post(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'this trip does not belong to the user'})
+
+    def test_post_accept_wrong_guideid(self):
+        data = {
+            'userId' : '13',
+            'tripId' : 2,
+            'guideId' : '15',
+        }
+        url = reverse('trip-acceptations')
+        response = self.client.post(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'this giude is not ordered to the trip'})
+
+    def test_post_accept_wrong_formula(self):
+        data = {
+            'userId' : '13',
+            'tripId' : 2,
+            'someradno' : 3832,
+        }
+        url = reverse('trip-acceptations')
+        response = self.client.post(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'bad formula'})
+
+    def test_delete_accept(self):
+        data = {
+            'userId' : '13',
+            'tripId' : 2,
+            'guideId' : '24f',
+        }
+        url = reverse('trip-acceptations')
+        self.client.post(url,data,format = 'json')
+        data = {
+            'userId' : '13',
+            'tripId' : 2,
+            'guideId' : '24f',
+        }
+        response = self.client.delete(url,data,format = 'json')
+        self.assertEqual(response.status_code,200)
+
+    def test_delete_accept_wrong_tripid(self):
+        data = {
+            'userId' : '13',
+            'tripId' : 2,
+            'guideId' : '24f',
+        }
+        url = reverse('trip-acceptations')
+        self.client.post(url,data,format = 'json')
+        data = {
+            'userId' : '13',
+            'tripId' : 234,
+            'guideId' : '24f',
+        }
+        response = self.client.delete(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'no trips with this ID'})
+
+    def test_delete_accept_wrong_userid(self):
+        data = {
+            'userId' : '13',
+            'tripId' : 2,
+            'guideId' : '24f',
+        }
+        url = reverse('trip-acceptations')
+        self.client.post(url,data,format = 'json')
+        data = {
+            'userId' : '14',
+            'tripId' : 2,
+            'guideId' : '24f',
+        }
+        response = self.client.delete(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'this trip does not belong to the user'})
+
+    def test_delete_accept_wrong_guideid(self):
+        data = {
+            'userId' : '13',
+            'tripId' : 2,
+            'guideId' : '24f',
+        }
+        url = reverse('trip-acceptations')
+        self.client.post(url,data,format = 'json')
+        data = {
+            'userId' : '13',
+            'tripId' : 2,
+            'guideId' : '22',
+        }
+        response = self.client.delete(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'this giude is not declared to the trip'})
+
     def test_apps(self):
         self.assertEqual(TripConfig.name,'trip')
         self.assertEqual(apps.get_app_config('trip').name, 'trip')
