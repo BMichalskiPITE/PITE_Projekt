@@ -91,7 +91,7 @@ def trip_announce_list(request, format = None):
                 guide = guide[0]
             else:
                 return JsonResponse({'form': 'no giudes with this ID'}, status=422)
-            if trip.filter(guides__id__contains = form.clean_userId()).count() == 0:
+            if trip.guides.filter(Q(id__icontains = form.clean_userId())).count() == 0:
                 return JsonResponse({'form': 'this giude is not ordered to the trip'}, status=422)
             trip.guides.remove(guide)
             serializer = TripSerializer(trip)
