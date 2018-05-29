@@ -85,6 +85,40 @@ class PlaceTestCase(APITestCase):
         response = self.client.post(url,data,format='json')
         self.assertEqual(response.status_code,200)
 
+    def test_delete_announce(self):
+        data = {
+            'userId' : '24f',
+            'tripId' : 1,
+        }
+        url = reverse('trip-orders')
+        self.client.post(url,data,format='json')
+        response = self.client.delete(url,data,format='json')
+        self.assertEqual(response.status_code,200)
+        response = self.client.delete(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'this giude is not ordered to the trip'})
+        data = {
+            'userId' : '13',
+            'tripId' : 1,
+        }
+        response = self.client.delete(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'this giude is not ordered to the trip'})
+        data = {
+            'userId' : '14f53',
+            'tripId' : 1,
+        }
+        response = self.client.delete(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'no giudes with this ID'})
+        data = {
+            'userId' : '13',
+            'tripId' : 123,
+        }
+        response = self.client.delete(url,data,format = 'json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'no trips with this ID'})
+ 
     def test_apps(self):
         self.assertEqual(TripConfig.name,'trip')
         self.assertEqual(apps.get_app_config('trip').name, 'trip')
