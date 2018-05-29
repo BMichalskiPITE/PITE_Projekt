@@ -1,6 +1,8 @@
 from rest_framework import generics, mixins
 from .models import User
+from trip.models import Trip
 from .serializers import UserSerializer
+from trip.serializers import TripSerializer
 from django.db.models import Q
 from django.http import JsonResponse
 from django.core import serializers
