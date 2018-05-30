@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'user',
     'place',
     'trip',
+    'star_ratings',
 )
 
 MIDDLEWARE_CLASSES = (

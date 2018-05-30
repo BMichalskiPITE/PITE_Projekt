@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^api/trips/$', trip_views.TripView.as_view(), name='trips-list'), 
     url(r'^api/places/(?P<placeId>.+)/$', place_views.PlaceRudView.as_view(), name='places-rud'), 
     url(r'^api/users/(?P<id>.+)/$', user_views.UserRudView.as_view(), name='users-rud'),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
     url(r'^api/trips/(?P<pk>.+)/$', trip_views.TripRudView.as_view(), name='trips-rud'),
     url(r'^api/orders/$', trip_views.trip_announce_list, name='trip-orders'),
     url(r'^api/acceptations/$', trip_views.trip_acceptation_list, name='trip-acceptations'),
