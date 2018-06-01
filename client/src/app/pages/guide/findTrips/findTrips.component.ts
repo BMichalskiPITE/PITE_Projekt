@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Place } from '../../../place';
 import { Router } from '@angular/router';
 import { RestService } from '../../../shared/rest.service';
+import { AuthService } from '../../../shared/auth.service';
 
 
 @Component({
@@ -42,15 +43,16 @@ export class FindTripsComponent implements OnInit {
         // }
     ]
 
-    constructor(private router:Router, private rest:RestService){}
+    constructor(private router:Router, private rest:RestService, private auth:AuthService){}
 
     ngOnInit() {
         this.trips = [];
-        this.rest.getAllTrips()
+        this.rest.getTripsToGuide()
         .then(t => {
             console.log("FEACH")
             console.log(t)
             for(let tr of t){
+                if(tr.guides) continue;
                 this.rest.getPlaceById(tr.places[0])
                 .then( d => {
                     this.rest.getUser(tr.userId)
@@ -69,8 +71,6 @@ export class FindTripsComponent implements OnInit {
                             },
                             isDeclared: false
                         }
-                        console.log("TRIPDETAILS")
-                        console.log(d);
                         this.trips.push(td);
                     })
                     .catch( e => {
@@ -96,14 +96,16 @@ export class FindTripsComponent implements OnInit {
     }
 
     declare(id:String):void {
-
+        this.rest.declareGuide(id, this.auth.getLoggedUser().id);
+        this.ngOnInit();
     }
 
     removeDeclaration(id:String):void {
-
+        this.rest.removeDeclarationGuide(id, this.auth.getLoggedUser().id);
+        this.ngOnInit();
     }
 
     author(id:String):void {
-
+        this.router.navigate([`profile/${id}`]);
     }
 }

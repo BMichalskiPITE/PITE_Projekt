@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'ubertravel.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = (
-    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +40,11 @@ INSTALLED_APPS = (
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'user',
+    'place',
+    'trip',
+    'star_ratings',
 )
 
 MIDDLEWARE_CLASSES = (

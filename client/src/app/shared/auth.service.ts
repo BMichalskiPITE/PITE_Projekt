@@ -26,7 +26,7 @@ export class AuthService {
     }
 
     setLoggedUser(user:LoggedUser):void {
-        //todo check from db if user is guide
+        user.is_guide = true;
         this.rest.tryRegister(user).then( r=> {
             this.rest.getUser(user.id).then(r2 => {
                 const userek = r2;

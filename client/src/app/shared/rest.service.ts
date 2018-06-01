@@ -55,4 +55,20 @@ export class RestService {
     public updateUser(user):Promise<any>{
         return this.http.put(environment.baseApiUrl + "api/users/", user).toPromise();
     }
+
+    public declareGuide(tripId:String, guideId:String):Promise<any> {
+        return this.POST(environment.baseApiUrl + "api/orders/", {userId: guideId, tripId: tripId});
+    }
+
+    public removeDeclarationGuide(tripId:String, guideId:String): Promise<any> {
+        return this.http.delete(environment.baseApiUrl + "api/orders?tripId="+tripId +"&userId="+guideId).toPromise();
+    }
+
+    public getUserById(id:String):Promise<any> {
+        return this.GET(environment.baseApiUrl + "api/users/"+id);
+    }
+
+    public getTripsToGuide():Promise<any> {
+        return this.GET(environment.baseApiUrl +"api/orders/")
+    }
 }

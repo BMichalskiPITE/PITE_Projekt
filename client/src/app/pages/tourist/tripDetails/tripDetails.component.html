@@ -34,23 +34,40 @@
                         <p>{{place.name}}</p>
                     </div>
                 </div>
-                <h2 *ngIf="details.guides" class="guides">Proposed guides</h2>
+                <h2 *ngIf="details.guides" class="guides">Trip guide</h2>
                 <div class="row show-grid guides" *ngFor = "let guide of details.guides">
-                    <div class="col-4 col-md-4">
+                    <div class="col-3 col-md-3">
                         <strong>{{guide.username}}</strong>
                     </div>
-                    <div class="col-1 col-md-1">
+                   <!-- <div class="col-1 col-md-1">
                         {{guide.grade}}pkt
-                    </div>
+                    </div> -->
                     <div class="col-3 col-md-3">
-                        <button (click)="redirectGuide(guide.id)" class="btn btn-primary info">Details</button>
+                    <ng-template #content let-c="close" let-d="dismiss">
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{guide.username}}</h4>
+                            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                         <div class="modal-body">
+                            <p>grade: {{guide.grade}}pkt</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" (click)="c('Close click')">Close</button>
+                        </div>
+                    </ng-template>
+
+                    <button class="btn btn-lg btn-primary" (click)="navigate(guide.id)">Details</button>
+
+                    <hr>
                     </div>
-                    <div class="col-4 col-md-4" *ngIf="!guide.selected">
-                        <button (click)="selectGuide(guide.id)" class="btn btn-primary info">Select</button>
-                    </div>
-                    <div class="col-4 col-md-4" *ngIf="guide.selected">
+                    <!-- <div class="col-4 col-md-4" *ngIf="!guide.selected">
+                        <button (click)="selectGuide(guide)" class="btn btn-primary info">Select</button>
+                    </div> -->
+                    <!-- <div class="col-4 col-md-4" *ngIf="guide.selected">
                         <h3>Selected!</h3>
-                    </div>
+                    </div> -->
                 </div>
             </nb-card-body>
         </nb-card>

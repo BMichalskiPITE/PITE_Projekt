@@ -39,9 +39,7 @@ export class PagesComponent implements OnInit, OnDestroy {
 
   private updateMenuVisibility(user:LoggedUser): void {
     const isLogged = !!user;
-    console.log("isLogged" + isLogged);
     const roles = isLogged ? user.roles : [];
-    console.log(user)
     for(const item of this.menu) {
       this.updateItem(item, isLogged, roles);
     }
@@ -52,7 +50,6 @@ export class PagesComponent implements OnInit, OnDestroy {
   } 
 
   private updateItem( item: NbMenuItem, isLogged: boolean, roles: Array<string>):void {
-    console.log(roles)
     if(!isLogged){
       if(item.title == "Dashboard"){
         item.hidden = false;

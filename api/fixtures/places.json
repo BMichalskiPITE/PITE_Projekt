@@ -1,6 +1,6 @@
 [
     {
-        "model": "api.place", 
+        "model": "place.place", 
         "pk": "ChIJjUf7MRBbFkcRg9Ls9752tqU", 
         "fields": {
             "name": "Krak\u00f3w Barbican", 
@@ -11,7 +11,7 @@
         }
      },
      {
-         "model": "api.place", 
+         "model": "place.place", 
          "pk": "ChIJv-Yt2g9bFkcR6Iut31RVCzY", 
          "fields": {
              "name": "Muzeum XX. Czartoryskich w Krakowie", 
