@@ -3,7 +3,7 @@
       Trip details!
     </nb-card-header>
 </nb-card>
-<div class="row show-grid">
+<div class="row show-grid" *ngIf="details">
     <div class="col-12 col-sm-6 col-md-6">
         <nb-card>
             <nb-card-header>
@@ -34,7 +34,7 @@
                         <p>{{place.name}}</p>
                     </div>
                 </div>
-                <h2 *ngIf="details.guides" class="guides">Proposed guides</h2>
+                <h2 *ngIf="details.guides" class="guides">Trip guide</h2>
                 <div class="row show-grid guides" *ngFor = "let guide of details.guides">
                     <div class="col-3 col-md-3">
                         <strong>{{guide.username}}</strong>
@@ -58,16 +58,16 @@
                         </div>
                     </ng-template>
 
-                    <button class="btn btn-lg btn-primary" (click)="open(content)">Details</button>
+                    <button class="btn btn-lg btn-primary" (click)="navigate(guide.id)">Details</button>
 
                     <hr>
                     </div>
-                    <div class="col-4 col-md-4" *ngIf="!guide.selected">
+                    <!-- <div class="col-4 col-md-4" *ngIf="!guide.selected">
                         <button (click)="selectGuide(guide)" class="btn btn-primary info">Select</button>
-                    </div>
-                    <div class="col-4 col-md-4" *ngIf="guide.selected">
+                    </div> -->
+                    <!-- <div class="col-4 col-md-4" *ngIf="guide.selected">
                         <h3>Selected!</h3>
-                    </div>
+                    </div> -->
                 </div>
             </nb-card-body>
         </nb-card>

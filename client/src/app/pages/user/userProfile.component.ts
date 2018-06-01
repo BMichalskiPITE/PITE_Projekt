@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
+import { RestService } from '../../shared/rest.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'user-profile',
@@ -7,26 +9,47 @@ import { AuthService } from '../../shared/auth.service';
 })
 export class UserProfileComponent implements OnInit{
 
-  user = {
-    id: "id",
-    username: "nazwa usera",
-    mail: "mail",
-    grade: 4.54
-  }
-
+  private sub;
+  private user; 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private rest:RestService,
+    private activate:ActivatedRoute
   ) {}
   
+  images = [
+    'http://vacationxtravel.com/wp-content/uploads/2014/02/Most-Visited-Tourist-Attractions-of-The-World1.jpg',
+    'http://4.bp.blogspot.com/-cXPqQWpnt9g/UD8NEUVeICI/AAAAAAAAIy8/y1H3Ty1J4N4/s1600/Eiffel+Tower.jpg',
+    'http://story.tourders.com/wp-content/uploads/2015/12/chiang-mai-2-1024x768.jpg',
+    'http://lovekrakow.pl/images/artykuly_zdjecia/981509455693.jpg',
+    'http://polygamia.pl/wp-content/im/7/10168/z10168567O,Smok-Wawelski-kolo-jamy.jpg'
+  ]
+  index = 0;
   public ngOnInit():void {
+    this.sub = this.activate.params.subscribe(params => {
+      const id = params['id'];
+      this.index = +id % this.images.length;
+      this.rest.getUserById(id).then(r => {
+        this.user = r;
+      })
+    });
+  }
+  
+  guide(v){
+    this.user.is_guide = v;
+    this.rest.updateUser(this.user);
+  }
 
+  getGrade():number {
+    if(!this.user) return 0.0;
+    if(!this.user.gradeNumber) {
+      return 0.0;
+    } else return this.user.gradeSum / this.user.gradeNumber;
   }
-  
-  submitUserSettings(){
+
+  isLogged():boolean {
     
+    return this.user && this.authService.getLoggedUser().id == this.user.id;
   }
-  
-  private isLogged():boolean {
-    return this.user.id == this.authService.getLoggedUser().id;
-  }
+
 }

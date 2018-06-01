@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { HttpModule } from '@angular/http';
 import { PlacesService } from './places.service'
 import { UserService } from './user.service'
 import {
@@ -44,7 +44,8 @@ export function getAuthServiceConfigs() {
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    HttpModule
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -19,7 +19,7 @@ export class PlacesComponent implements OnInit {
 
   showPlaces() {
     this.placesService.getPlaces()
-      .subscribe(data => { 
+      .then(data => { 
         this.places = data;
       });
   }

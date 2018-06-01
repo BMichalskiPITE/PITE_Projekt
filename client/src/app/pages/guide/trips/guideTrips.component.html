@@ -17,11 +17,8 @@
             <div class="col-2 col-md-2">
                 <button (click)="author(trip.author.name)" class="btn btn-primary info">{{trip.author.name}}</button>
             </div>
-            <div class="col-2 col-md-2" *ngIf="!trip.isSelected">
+            <div class="col-2 col-md-2">
                 <button (click)="removeDeclaration(trip.tripId)" class="btn btn-warning info">Remove declaration</button>
-            </div>
-            <div class="col-2 col-md-2" *ngIf="trip.isSelected">
-                You are the choosen one!
             </div>
         </div>
     </nb-card-body>

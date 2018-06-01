@@ -1,12 +1,24 @@
 <nb-card>
     <nb-card-header>
-        {{user.username}}
+        {{user?.username}}
     </nb-card-header>
     <nb-card-body>
-        <div>
-            <nb-checkbox [(ngModel)]="userIsGuide">Enabled guide mode?</nb-checkbox>
-            <br>
-            <button class="btn" (click)="submitUserSettings()">Save settings</button>
+        <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="row panel">
+                <img src = "{{images[index]}}" class="col-md-4 bg_blur "/>
+                <div class="col-md-8  col-xs-12">
+                   <img src="{{user.imageUrl}}" class="img-thumbnail picture hidden-xs" />
+                   <div class="header">
+                        <h1>{{user.username}}</h1>
+                        <h4>{{user.mail}}</h4>
+                        <span>Global grade: {{getGrade()}} stars!</span>
+                        <span *ngIf="!isLogged()">Select your grade</span>
+                   </div>
+                </div>
+            </div>   
         </div>
+        <button *ngIf = "isLogged() && user.is_guide" class="btn" (click)="guide(false)">Tourist only</button>
+        <button *ngIf = "isLogged() && !user.is_guide" class="btn" (click)="guide(true)">Guide mode</button>
+        
     </nb-card-body>
 </nb-card>

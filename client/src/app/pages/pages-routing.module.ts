@@ -31,12 +31,12 @@ const routes: Routes = [{
     {
       path:'profile/:id',
       component: UserProfileComponent,
-      // canActivate: [TouristAuthGuard]
+       canActivate: [TouristAuthGuard]
     },
     {
       path:'tourist',
       //component: TouristComponent,
-      //canActivate: [TouristAuthGuard]
+      canActivate: [TouristAuthGuard],
       children:[
         {
           path:'trip',
@@ -54,6 +54,7 @@ const routes: Routes = [{
     },
     {
       path:'guide',
+      canActivate: [GuideAuthGuard],
       children:[
         {
           path:'find',

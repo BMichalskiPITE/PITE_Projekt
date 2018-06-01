@@ -6,12 +6,12 @@ import { LoggedUser } from '../commons/loggedUser';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { GlobalState } from './global.state';
 import { Observable } from 'rxjs/Observable';
-
+import { RestService } from './rest.service';
 @Injectable()
 export class AuthService {
 
     private loggedUser:BehaviorSubject<LoggedUser> = new BehaviorSubject<LoggedUser>(undefined);
-    constructor() { }
+    constructor(private rest: RestService) { }
 
     isLogged():boolean {
         return !!this.loggedUser.getValue();
@@ -22,12 +22,31 @@ export class AuthService {
     }
 
     subscribeLoggedUser():Observable<LoggedUser> {
-        return this.loggedUser.asObservable();
+        return this.loggedUser;
     }
 
     setLoggedUser(user:LoggedUser):void {
-        //todo check from db if user is guide
-        this.loggedUser.next(user);
+        user.is_guide = true;
+        this.rest.tryRegister(user).then( r=> {
+            this.rest.getUser(user.id).then(r2 => {
+                const userek = r2;
+                userek.roles = ["tourist"]
+                if(userek.is_guide){
+                    userek.roles.push("guide")
+                }
+                this.loggedUser.next(userek);
+            })
+        }).catch(e => 
+            this.rest.getUser(user.id).then(r2 => {
+                const userek = r2;
+                userek.roles = ["tourist"]
+                if(userek.is_guide){
+                    userek.roles.push("guide")
+                }
+                this.loggedUser.next(userek);
+            })
+            .catch( r3 => this.loggedUser.next(user))
+        );
     }
 
     isGuideNow(): boolean {

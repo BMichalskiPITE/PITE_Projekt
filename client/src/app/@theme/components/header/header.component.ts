@@ -85,6 +85,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout() {
     this.socialAuthService.signOut().then(
       data => {
+          this.router.navigate(["/"]);
           this.authService.logout();
       }
     ).catch(e => e);
