@@ -52,7 +52,7 @@ export class FindTripsComponent implements OnInit {
             console.log("FEACH")
             console.log(t)
             for(let tr of t){
-                if(tr.guides) continue;
+                if(tr.guides.length > 0) continue;
                 this.rest.getPlaceById(tr.places[0])
                 .then( d => {
                     this.rest.getUser(tr.userId)
@@ -96,13 +96,11 @@ export class FindTripsComponent implements OnInit {
     }
 
     declare(id:String):void {
-        this.rest.declareGuide(id, this.auth.getLoggedUser().id);
-        this.ngOnInit();
+        this.rest.declareGuide(id, this.auth.getLoggedUser().id).then(e => this.ngOnInit());
     }
 
     removeDeclaration(id:String):void {
-        this.rest.removeDeclarationGuide(id, this.auth.getLoggedUser().id);
-        this.ngOnInit();
+        this.rest.removeDeclarationGuide(id, this.auth.getLoggedUser().id).then(e => this.ngOnInit());
     }
 
     author(id:String):void {

@@ -3,10 +3,10 @@
     <button (click)="refresh()">Refresh</button>
     <div>
       <div *ngFor="let message of messages">
-        <nb-card>
+        <div class="message">
           <div>From {{message.fromUserId}} to {{message.toUserId}}</div>
           <div>{{message.message}}</div>
-        </nb-card>
+        </div>
       </div>
     </div>
     <hr>

@@ -37,7 +37,7 @@ export class AddTripComponent implements OnInit {
       this.ids = this.selectedPlaces.map(p => p.placeId);
   }
   registerTrip():void {
-      console.log("sggs")
+      if(!this.tripDescription || !this.tripName) return;
       this.rest.addTrip({
           userId: this.auth.getLoggedUser().id,
           tripName: this.tripName,
