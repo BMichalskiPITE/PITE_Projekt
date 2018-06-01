@@ -1,0 +1,24 @@
+[
+    {
+        "model": "place.place", 
+        "pk": "ChIJjUf7MRBbFkcRg9Ls9752tqU", 
+        "fields": {
+            "name": "Krak\u00f3w Barbican", 
+            "photoRef": "CmRaAAAA5BVnVf3jbhlpkmnjhzDF_lSr9y0fuMFqjDUe6j8a4AvyoCwPf1jKUp6wyeisieoQuPvArPQ7_GXXkX3j9a4HWowGHcDR-V5SvQ_R5iVj7h5RMwbpBzlw9_rC0FYdw6S0EhC9kT0XSOERfzAF9ONCtvhrGhRLaEz1k5gAK-ZLki8v9jkfjrt4hA", 
+            "vicinty": "Basztowa, Krak\u00f3w", 
+            "latitude": 50.0654718, 
+            "longitude": 19.9416613
+        }
+     },
+     {
+         "model": "place.place", 
+         "pk": "ChIJv-Yt2g9bFkcR6Iut31RVCzY", 
+         "fields": {
+             "name": "Muzeum XX. Czartoryskich w Krakowie", 
+             "photoRef": "CmRaAAAAEnf6pOTUJdMv0aC-5ukwXNY74FKVl-kPCEmnhX-eSodHY3ZKukK5170GUfwlrHnGj3IDhNoeqWeFe0hlDVxQBQ-iCO9fZS21234nqbqL_mRTsEGQYOnfuHB9_I6OAQstEhAJ_7GwApaE-C8hl0P5uKA9GhSFhDgeTNVC837G9LLT26SzyJWbrg", 
+             "vicinty": "\u015bw. Jana 19, Krak\u00f3w", 
+             "latitude": 50.0646406, 
+             "longitude": 19.9399668
+        }
+    }
+]

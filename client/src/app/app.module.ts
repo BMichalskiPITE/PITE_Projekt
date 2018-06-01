@@ -19,6 +19,7 @@ import {
   FacebookLoginProvider
 } from "angular5-social-login";
 import { SharedModule } from './shared/shared.module';
+import { MessageService } from './shared/message.service';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -53,7 +54,8 @@ export function getAuthServiceConfigs() {
       useFactory: getAuthServiceConfigs
     },
     PlacesService,
-    UserService
+    UserService,
+    MessageService
   ],
 })
 export class AppModule {

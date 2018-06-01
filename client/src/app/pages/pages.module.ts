@@ -16,6 +16,7 @@ import { AllTripsComponent } from './tourist/allTrips/allTrips.component';
 import { TripDetailsComponent } from './tourist/tripDetails/tripDetails.component';
 import { FindTripsComponent } from './guide/findTrips/findTrips.component';
 import { GuideTripsComponent } from './guide/trips/guideTrips.component';
+import { MessageComponent } from './message/message.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -27,6 +28,7 @@ const PAGES_COMPONENTS = [
   TripDetailsComponent,
   FindTripsComponent,
   GuideTripsComponent,
+  MessageComponent
 ];
 
 @NgModule({

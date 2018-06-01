@@ -1,0 +1,25 @@
+<nb-card>
+  <button (click)="refresh()">Refresh</button>
+  message works!
+  <div>
+    <div *ngFor="let message of messages">
+      {{message.message}} from {{message.fromUserId}}
+    </div>
+  </div>
+
+  <form>
+    <div>
+      <label>To: </label>
+      <select>
+        <option value="300">test</option>
+      </select>
+    </div>
+    <div>
+      <textarea>
+
+      </textarea>
+    </div>
+    <button type="submit"></button>
+  </form>>
+
+</nb-card>

@@ -13,6 +13,7 @@ import { AllTripsComponent } from './tourist/allTrips/allTrips.component';
 import { TripDetailsComponent } from './tourist/tripDetails/tripDetails.component';
 import { FindTripsComponent } from './guide/findTrips/findTrips.component';
 import { GuideTripsComponent } from './guide/trips/guideTrips.component';
+import { MessageComponent } from './message/message.component';
 
 const routes: Routes = [{
   path: '',
@@ -63,6 +64,10 @@ const routes: Routes = [{
           component: GuideTripsComponent
         }
       ]
+    },
+    {
+      path: 'messages',
+      component: MessageComponent
     }
   ],
 }];

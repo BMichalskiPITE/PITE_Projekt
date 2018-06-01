@@ -46,7 +46,7 @@ ng serve
 # migrations 
  - python manage.py makemigrations
  - python manage.py migrate
- - python manage.py loaddata .\api\fixtures\places.json
+ - python manage.py loaddata .\place\fixtures\places.json
  
  # travis-ci
  - https://travis-ci.org/BMichalskiPITE/PITE_Projekt

@@ -16,3 +16,10 @@ class User(models.Model):
 
     def get_api_url(self, request = None):
         return reverse("users-rud", kwargs ={'id': self.id}, request = request)
+
+
+class Message(models.Model):
+    id = models.AutoField(primary_key=True)
+    fromUserId = models.CharField(max_length=200)
+    toUserId = models.CharField(max_length=200)
+    message = models.CharField(max_length=2000)

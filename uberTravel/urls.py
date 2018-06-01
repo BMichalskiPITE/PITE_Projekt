@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^api/trips/(?P<pk>.+)/$', trip_views.TripRudView.as_view(), name='trips-rud'),
     url(r'^api/orders/$', trip_views.trip_announce_list, name='trip-orders'),
     url(r'^api/acceptations/$', trip_views.trip_acceptation_list, name='trip-acceptations'),
+    url(r'^api/messages/$', user_views.MessagesView.as_view(), name='messages-list'),
     url(r'^admin/', admin.site.urls),
 ]

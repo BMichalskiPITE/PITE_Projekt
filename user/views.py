@@ -1,7 +1,7 @@
 from rest_framework import generics, mixins
-from .models import User
+from .models import User,Message
 from trip.models import Trip
-from .serializers import UserSerializer
+from .serializers import UserSerializer,MessageSerializer
 from trip.serializers import TripSerializer
 from django.db.models import Q
 from django.http import JsonResponse
@@ -35,3 +35,7 @@ class UserRudView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_serializer_context(self, *args, **kwargs):
         return {"request": self.request}
+
+class MessagesView(generics.ListCreateAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer

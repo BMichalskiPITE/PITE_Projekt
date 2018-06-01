@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User,Message
 
 class UserSerializer(serializers.ModelSerializer):
     url         = serializers.SerializerMethodField(read_only = True)
@@ -24,3 +24,14 @@ class UserSerializer(serializers.ModelSerializer):
         qs = User.objects.filter(id__iexact=value)
         if qs.exists():
             raise serializers.ValidationError("This user already exists")
+
+
+class MessageSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Message
+        fields = [
+        'id',
+        'fromUserId',
+        'toUserId',
+        'message'
+        ]

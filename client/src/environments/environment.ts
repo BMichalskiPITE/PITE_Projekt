@@ -10,5 +10,5 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: "http://ubertravel.herokuapp.com/"
+  baseApiUrl: "http://localhost:8000/"
 };

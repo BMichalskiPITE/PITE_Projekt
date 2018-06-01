@@ -58,5 +58,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         }
       }
     ]
+  },
+  {
+    title: 'Messages',
+    icon: 'nb-inbox',
+    link: '/messages'
   }
 ];
