@@ -6,6 +6,7 @@ import { Http, Response } from '@angular/http';
 import { environment } from '../../environments/environment'
 import { Observable } from 'rxjs/Observable';
 import { Place } from '../place';
+import { Message } from '../message';
 
 @Injectable()
 export class RestService {
@@ -51,6 +52,9 @@ export class RestService {
     public getUser(userID:string):Promise<any> {
         return this.GET(environment.baseApiUrl + "api/users/"+ userID);
     }
+    public getUsers():Promise<any> {
+        return this.GET(environment.baseApiUrl + "api/users/");
+    }
 
     public updateUser(user):Promise<any>{
         return this.http.put(environment.baseApiUrl + "api/users/", user).toPromise();
@@ -70,5 +74,13 @@ export class RestService {
 
     public getTripsToGuide():Promise<any> {
         return this.GET(environment.baseApiUrl +"api/orders/")
+    }
+
+    public getMessages(userId: string): Promise<Message[]> {
+        return this.GET(environment.baseApiUrl + "api/messages?userId=" + userId);
+      }
+    
+    public postMessage(fromUserId: string,toUserId : string, message: string){
+        return this.POST(environment.baseApiUrl + "api/messages/", {fromUserId: fromUserId, toUserId: toUserId, message: message});
     }
 }

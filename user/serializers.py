@@ -33,5 +33,6 @@ class MessageSerializer(serializers.ModelSerializer):
         'id',
         'fromUserId',
         'toUserId',
-        'message'
+        'message',
+        'date'
         ]

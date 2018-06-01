@@ -1,25 +1,26 @@
 <nb-card>
-  <button (click)="refresh()">Refresh</button>
-  message works!
   <div>
-    <div *ngFor="let message of messages">
-      {{message.message}} from {{message.fromUserId}}
+    <button (click)="refresh()">Refresh</button>
+    <div>
+      <div *ngFor="let message of messages">
+        <nb-card>
+          <div>From {{message.fromUserId}} to {{message.toUserId}}</div>
+          <div>{{message.message}}</div>
+        </nb-card>
+      </div>
     </div>
+    <hr>
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label>To: </label>
+        <select [(ngModel)]="toUserId" name="toUserId">
+          <option *ngFor="let user of users" value={{user.id}}>{{user.username}}</option>
+        </select>
+      </div>
+      <div>
+        <textarea class="form-control" rows="6" cols="10" [(ngModel)]="message" name="message"></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   </div>
-
-  <form>
-    <div>
-      <label>To: </label>
-      <select>
-        <option value="300">test</option>
-      </select>
-    </div>
-    <div>
-      <textarea>
-
-      </textarea>
-    </div>
-    <button type="submit"></button>
-  </form>>
-
 </nb-card>

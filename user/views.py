@@ -1,4 +1,4 @@
-from rest_framework import generics, mixins
+from rest_framework import generics, mixins, filters
 from .models import User,Message
 from trip.models import Trip
 from .serializers import UserSerializer,MessageSerializer
@@ -36,6 +36,21 @@ class UserRudView(generics.RetrieveUpdateDestroyAPIView):
     def get_serializer_context(self, *args, **kwargs):
         return {"request": self.request}
 
-class MessagesView(generics.ListCreateAPIView):
+class MessagesView(mixins.CreateModelMixin, generics.ListAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+
+    def get_queryset(self):
+        id = self.request.query_params.get('id', None)
+        userId = self.request.query_params.get('userId', None)
+
+        if id is not None:
+            return Message.objects.filter(id=id)    
+        
+        if userId is not None:
+            return Message.objects.filter(Q(fromUserId=userId) | Q(toUserId=userId))
+
+        return Message.objects.all()
+
+    def post(self,request,*args,**kwargs):
+        return self.create(request, *args, **kwargs)

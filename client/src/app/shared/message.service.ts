@@ -12,4 +12,8 @@ export class MessageService {
   getMessages() {
     return this.http.get<Message[]>(this.messagesUrl);
   }
+
+  postMessage(msg: Message){
+      this.http.post(this.messagesUrl,msg);
+  }
 }

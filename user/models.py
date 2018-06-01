@@ -1,5 +1,6 @@
 from django.db import models
 from rest_framework.reverse import reverse
+from datetime import datetime   
 # Create your models here.
 
 class User(models.Model):
@@ -23,3 +24,4 @@ class Message(models.Model):
     fromUserId = models.CharField(max_length=200)
     toUserId = models.CharField(max_length=200)
     message = models.CharField(max_length=2000)
+    date = models.DateTimeField(default=datetime.now, blank=True)
