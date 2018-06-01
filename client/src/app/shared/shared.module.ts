@@ -15,7 +15,7 @@ export class SharedModule {
                 AuthService,
                 RestService,
                 TouristAuthGuard,
-                // GuideAuthGuard,
+                GuideAuthGuard,
             ]
         }
     }

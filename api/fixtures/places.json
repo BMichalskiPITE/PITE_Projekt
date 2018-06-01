@@ -20,5 +20,126 @@
              "latitude": 50.0646406, 
              "longitude": 19.9399668
         }
+    },
+    {
+        "model": "place.place", 
+        "pk": "ChIJ3Q97Bw5bFkcRc3GzJiVsH9A", 
+        "fields": {
+            "name": "The Cloth Hall", 
+            "photoRef": "CmRaAAAA4WkBG5eOy8fNRbwZsuc2jHLZoogfJyl2TWZRdS8tjYH9a1xHUO5dod2fRHM-4avlOEPEAY4FM6KR5HZUjUqognKh8RbsLCRq2yQz-QeOvZ4SsPT55kp5Yu--AJkmat4zEhAblKV4nmDFM5jM7zHNyafJGhRsLcuhg7LUZyNZveL3cS6bam-z7w", 
+            "vicinty": "Rynek Główny 1-3, Kraków", 
+            "latitude": 50.0615991, 
+            "longitude": 19.9373312
+       }
+   },
+   {
+       "model": "place.place", 
+       "pk": "ChIJ9Rk2BW1bFkcRmKV_1sTfuaw", 
+       "fields": {
+           "name": "Wawel Royal Castle", 
+           "photoRef": "CmRaAAAAHp7i7YyrIyFAonpKabC-FivzgWYxuRtzWfURZslJQ5fzo3EF-H2BMzApf0C88wcrN0z2kHnpH4RJQh_9IZ-sAZpDdwN77c9asOqKx1xAg2I5AtxeG00uupbdvIb5NoI2EhCFHDYF53jMMe_f_Q5f6aD0GhReBZjit-_NYRvswE0cHXxuoN3Mnw", 
+           "vicinty": "Wawel 5, Kraków", 
+           "latitude": 50.0540495, 
+           "longitude": 19.9354123
+      }
+    },
+    {
+        "model": "place.place", 
+        "pk": "ChIJ39ffX9JaFkcR86cKqC04JVg", 
+        "fields": {
+            "name": "Polish Aviation Museum", 
+            "photoRef": "CmRaAAAAFV1VG0pMRxYTJQjnnaBunxzwCXEix2ij-JynxO9KUJ4H842g4VoAAKtOaECMkmHnN6v5EoOBwI4zSaV6o4BVkvKEvVW1JInfyX3Gn_MWjxOspBt3EafJzifX-hmQSqhZEhA1g2l7izsUg3AB4j8565zpGhSYASayUBQPxUbSkfx0lEzWeDn9wQ", 
+            "vicinty": "al. Jana Pawła II 39, Kraków", 
+            "latitude": 50.0774313, 
+            "longitude": 19.9913072
+        }
+    },
+    {
+        "model": "place.place", 
+        "pk": "ChIJyx3P-BdbFkcRhucFB_6DMvA", 
+        "fields": {
+            "name": "Botanic Garden of the Jagiellonian University", 
+            "photoRef": "CmRaAAAAmiXaCqMpGUNIZtaYFTtmxOjCaDKCWyW18SLSP29tQ50AHWv5PYVFGN9hdavtt5ghK4MOakLotAgY_oUkBgQj13pZTm1TeOGeCEH0KQw2_tDHfOr0PFk5Xf4QlEUh07HpEhCGEgCYHcy-Avvz4dIvnQXsGhTC101BdkvrQzO9nCmOrux_9B1EXA", 
+            "vicinty": "Mikołaja Kopernika 27, Kraków", 
+            "latitude": 50.0628768, 
+            "longitude": 19.9575777
+        }
+    },
+    {
+        "model": "place.place", 
+        "pk": "ChIJ9QITtJhbFkcRx-jRTeHpdLo", 
+        "fields": {
+            "name": "Krakowskie Błonia", 
+            "photoRef": "CmRaAAAAJcrfg3nMfqVR1kgGjndpBXKehSU23emo7ZII7g1-mjRdpb0UqTHS7XFD1OxSREHlQCil2DwcQwyGHdK5TU1WouREgLSW9DJkPxEIz8i_3JFPjUj13Md6lnM19j-v1b2EEhA88hF3jZxNMxj4rgYKRmAhGhQzSDVrlUdkECZsZ88cnSGdbXCHCA", 
+            "vicinty": "Krak\u00f3w", 
+            "latitude": 50.05826159999999, 
+            "longitude": 19.9058104
+    }
+    },
+    {
+        "model": "place.place", 
+        "pk": "ChIJD33rFlFbFkcRm8RI-zVdc3Y", 
+        "fields": {
+            "name": "Krakus Mound", 
+            "photoRef": "CmRaAAAAi_iXjQUWpZJwuIusgOTmadXnfapBJ6yf44eQfsES5ps0cKzxzfyTp6kizBksthlYkfBY37rlAkpH3GHYc_x1NbHDZFASKyYCLttNQJTgsklu9cDbk7F9pW0qNO3ySzniEhB_0v34vGwDZsjR0luDMoVxGhSXEkVhCPPFGu7Je3E2pdBxZK48vA", 
+            "vicinty": "Krak\u00f3w", 
+            "latitude": 50.0380814, 
+            "longitude": 19.9584354
+    }
+    },
+    {
+        "model": "place.place", 
+        "pk": "ChIJnYyClpFbFkcRM1wE20RBCGc", 
+        "fields": {
+            "name": "Kościuszko Mound", 
+            "photoRef": "CmRaAAAAXG7mX_hWD8WB_TdFJ1JQSJC--Ip7769rXPhV6BTHWnveTC6_Dx1MdPCLRXE9r8IdRbsjeOLYH4yur_P7P22ap-Yt9AfKxcwSFbrel6nuzzeEfLHmUHpvc17cZljHa9gyEhDe9pF_rpcpLF6UJ-fsf1XGGhS03eFOoWABmN2H8Ci9SCSSh8guEQ", 
+            "vicinty": "Krak\u00f3w", 
+            "latitude": 50.0549401, 
+            "longitude": 19.8932247
+    }
+    },
+    {
+        "model": "place.place", 
+        "pk": "ChIJhWQOxlBZFkcRYRF_KETlCrQ", 
+        "fields": {
+            "name": "Piłsudski's Mound", 
+            "photoRef": "CmRaAAAAbY5TBzShBr68du6CkXfsW6KK6NdS70Unkjvd6n0qHPKkyf8-RGxeQPFZg89hYAdH0kqC-9IPaO55Jmpv13pFpiGgBomW9U_JSpvdz73ibk61ctNcmbZTLZefg77AOSMoEhCgUpLdgs9Ea0v7hbnP7I_rGhSI3zzGt4g9Esb6WO4tIpF-Ft8ZMw", 
+            "vicinty": "Krak\u00f3w", 
+            "latitude": 50.06465009999999, 
+            "longitude": 19.94498
+    }
+    },
+    {
+        "model": "place.place", 
+        "pk": "ChIJFdq8daRFFkcR8Vyto3Z0KA4", 
+        "fields": {
+            "name": "Kopiec Wandy", 
+            "photoRef": "CmRaAAAAyUgg4pqoYpiw-lVDyb3O4C59zEVb4Peodr0l5kZwLLO5PKxuf-91aNMD13WhEUGQ0LMBg-k3q-rprL6bqV5qJ5ij7cKAFlsApnbCqBb3fw8a7cuxlxJBDescS_ylarUQEhDHpCyq1CB6V9Ft36g75BFnGhRIFzNWCKLNWpi3h5n_YYvrma3gjA", 
+            "vicinty": "Krak\u00f3w", 
+            "latitude": 50.07022449999999, 
+            "longitude": 20.0680733
+    }
+    },
+    {
+        "model": "place.place", 
+        "pk": "ChIJbUElEhJbFkcRXzAqMneGkjk", 
+        "fields": {
+            "name": "Planty Park", 
+            "photoRef": "CmRaAAAAwkn5NyGQI-jzAideSBWxw5guJJ6XoJ76UVFMt4gVFw5A1p3hjvrl8NH7EiVXGp_-amd98zq4Wsj-WZy8aJVwAwPR7b5_oUzkF_DmC6ts0yywroy8JINjB-VJA-EaosIzEhB-0FigM8NmTty16RWvKS_EGhTL65nu0g0FTGBExDtzm3cC8LeKQw", 
+            "vicinty": "Planty, Kraków", 
+            "latitude": 50.0599137, 
+            "longitude": 19.9422001
+    }
+    },
+    {
+        "model": "place.place", 
+        "pk": "ChIJ7cM2Q0dbFkcRnYl5A7Iu0bc", 
+        "fields": {
+            "name": "Kazimierz", 
+            "photoRef": "CmRaAAAA0DLEEo3ghchuphkHUGxwCrrwody3p88_2Cc_kijQpZPlCG2ETc8J9LtdVRsl0mhZ3BP7wxs80PQ75iptrJoptbApsuY4tdjt8ohqpV2AYFmfF1HVrxyDOCVTb0V0RZhmEhA0fswWZqfN2b624SYlBX2oGhSJr_BgsUMYvob6zuNX7x-jy4EQOg", 
+            "vicinty": "Krak\u00f3w", 
+            "latitude": 50.0495003, 
+            "longitude": 19.9429071
+    }
     }
 ]
