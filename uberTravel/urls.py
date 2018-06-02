@@ -20,6 +20,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^api/sync/places/$', place_views.PlaceSyncView.as_view({'get': 'sync'}), name='places-list'),
     url(r'^api/places/$', place_views.PlaceView.as_view(), name='places-list'),
     url(r'^api/users/$', user_views.UserView.as_view(), name='users-list'),
     url(r'^api/trips/$', trip_views.TripView.as_view(), name='trips-list'), 

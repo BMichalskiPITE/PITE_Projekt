@@ -53,3 +53,7 @@ ng serve
 
 # heroku deployment
 - https://ubertravel.herokuapp.com/
+
+# sync
+
+- api/sync/places/
