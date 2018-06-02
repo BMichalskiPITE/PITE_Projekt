@@ -15,13 +15,14 @@
                         <br>
                         <span>Global grade: {{getGrade()}} stars!</span>
                         <br><br>
-                        <p><span *ngIf="!isLogged()">
+                        <span *ngIf="!isLogged()">
                             <h5>Select your grade
-                            </h5></span></p>
+                            </h5>
                             &emsp;
-                        <a *ngFor="let item of starList; let i=index " (click)="setStar(i)">  
-                            <i class="fa" [ngClass]="{'fa-star-o':item,'fa-star':!item}"></i>   
-                        </a>  
+                            <a *ngFor="let item of starList; let i=index " (click)="setStar(i)">  
+                                <i class="fa" [ngClass]="{'fa-star-o':item,'fa-star':!item}"></i>   
+                            </a> 
+                        </span> 
                    </div>
                 </div>
             </div>   
