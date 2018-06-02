@@ -13,24 +13,35 @@ import { User } from '../../user';
 })
 export class MessageComponent implements OnInit {
 
-  messages: Message[];
+  messages: any[];
   toUserId: string;
   message: string;
-  users: User[];
+  users: any[];
 
   constructor(private auth: AuthService,
               private rest: RestService) { }
 
   ngOnInit() {
-    this.refresh();
-    this.rest.getUsers().then(users => this.users = users);
+    
+    this.rest.getUsers().then(
+      users => this.users = users
+    ).then(
+      x => { this.refresh(); return x; }
+    )
   }
 
   refresh() {
     if(!this.auth.getLoggedUser()){
       return;
     }
-    this.rest.getMessages(this.auth.getLoggedUser().id).then(msgs => this.messages = msgs);
+    this.rest.getMessages(this.auth.getLoggedUser().id).then(
+      msgs => this.messages = msgs.map(m => { 
+        let mappedMsg: any = m;
+        mappedMsg.fromUsername = this.users.find(u => u.id === m.fromUserId).username
+        mappedMsg.toUsername = this.users.find(u => u.id === m.toUserId).username
+        return mappedMsg; 
+      })
+    );
   }
 
   onSubmit(){
