@@ -6,13 +6,22 @@
         <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
             <div class="row panel">
                 <img src = "{{images[index]}}" class="col-md-4 bg_blur "/>
-                <div class="col-md-8  col-xs-12">
+                <div class="col-md-8  col-xs-12" align="center">
+                    <br>
                    <img src="{{user.imageUrl}}" class="img-thumbnail picture hidden-xs" />
-                   <div class="header">
+                   <div class="header" >
                         <h1>{{user.username}}</h1>
                         <h4>{{user.mail}}</h4>
+                        <br>
                         <span>Global grade: {{getGrade()}} stars!</span>
-                        <span *ngIf="!isLogged()">Select your grade</span>
+                        <br><br>
+                        <p><span *ngIf="!isLogged()">
+                            <h5>Select your grade
+                            </h5></span></p>
+                            &emsp;
+                        <a *ngFor="let item of starList; let i=index " (click)="setStar(i)">  
+                            <i class="fa" [ngClass]="{'fa-star-o':item,'fa-star':!item}"></i>   
+                        </a>  
                    </div>
                 </div>
             </div>   
