@@ -5,14 +5,14 @@
   <nb-card-body>
     <div class="row">
       <div class="col-md-6">
-        <button class="btn btn-default" (click)="refresh()">Refresh</button>
+        <button class="btn btn-default" (click)="refresh()">Reload</button>
         <div *ngFor="let message of messages" class="message">
           <div class="row">
             <div class="col-md-6">
               <div>From {{message.fromUsername}} to {{message.toUsername}}</div>
             </div>
             <div class="col-md-6">
-              <div>{{message.date}}</div>
+              <div class="pull-right">{{message.date}}</div>
             </div>
           </div>
           <div class="row">
@@ -31,6 +31,7 @@
         </div>
       </div>
       <div class="col-md-6">
+        <h5>New message</h5>
         <form (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label>To: </label>

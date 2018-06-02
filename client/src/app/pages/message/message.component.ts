@@ -37,8 +37,9 @@ export class MessageComponent implements OnInit {
     this.rest.getMessages(this.auth.getLoggedUser().id).then(
       msgs => this.messages = msgs.map(m => { 
         let mappedMsg: any = m;
-        mappedMsg.fromUsername = this.users.find(u => u.id === m.fromUserId).username
-        mappedMsg.toUsername = this.users.find(u => u.id === m.toUserId).username
+        mappedMsg.fromUsername = this.users.find(u => u.id === m.fromUserId).username;
+        mappedMsg.toUsername = this.users.find(u => u.id === m.toUserId).username;
+        mappedMsg.date = mappedMsg.date.substr(0,19).replace('T',' ');
         return mappedMsg; 
       })
     );
