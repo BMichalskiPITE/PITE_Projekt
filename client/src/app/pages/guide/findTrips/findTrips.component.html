@@ -15,7 +15,7 @@
                     <button (click)="redirect(trip.tripId)" class="btn btn-primary info">Details</button>
                 </div>
                 <div class="col-2 col-md-2">
-                    <button (click)="author(trip.author.name)" class="btn btn-primary info">{{trip.author.name}}</button>
+                    <button (click)="author(trip.author.id)" class="btn btn-primary info">{{trip.author.name}}</button>
                 </div>
                 <div class="col-2 col-md-2" *ngIf="!trip.isDeclared">
                     <button (click)="declare(trip.tripId)" class="btn btn-primary info">Be a guide</button>
