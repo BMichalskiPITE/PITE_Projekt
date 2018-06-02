@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
 import { RestService } from '../../shared/rest.service';
 import { ActivatedRoute } from '@angular/router';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'user-profile',
@@ -40,16 +41,39 @@ export class UserProfileComponent implements OnInit{
     this.rest.updateUser(this.user);
   }
 
-  getGrade():number {
-    if(!this.user) return 0.0;
-    if(!this.user.gradeNumber) {
-      return 0.0;
-    } else return this.user.gradeSum / this.user.gradeNumber;
+
+starList: boolean[] = [true,true,true,true,true];       // create a list which contains status of 5 stars
+rating:number;
+//Create a function which receives the value counting of stars click, 
+//and according to that value we do change the value of that star in list.
+setStar(data:any){
+      this.rating=data+1;                               
+      for(let i=0;i<=4;i++){  
+        if(i<=data){  
+          this.starList[i]=false;  
+        }  
+        else{  
+          this.starList[i]=true;  
+        }  
+     }
+     this.user.gradesSum += this.rating;
+     this.user.gradesNumber += 1; 
+
+     this.rest.updateUser(this.authService.getLoggedUser()); 
+ }
+
+  getGrade():string {
+    if(!this.user) return "0";
+    if(!this.user.gradesNumber) {
+      return "0";
+    } else return (this.user.gradesSum / this.user.gradesNumber).toFixed(1);
   }
 
   isLogged():boolean {
     
     return this.user && this.authService.getLoggedUser().id == this.user.id;
   }
+
+
 
 }
