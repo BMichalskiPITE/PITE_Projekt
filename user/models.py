@@ -2,6 +2,8 @@ from django.db import models
 from rest_framework.reverse import reverse
 from datetime import datetime   
 # Create your models here.
+from pprint import pprint
+
 
 class User(models.Model):
     id = models.CharField(max_length=200,primary_key=True)
