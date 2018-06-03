@@ -30,7 +30,6 @@ export class RestService {
     }
 
     public addTrip(trip:any):Promise<any> {
-        console.log(trip)
         return this.POST(environment.baseApiUrl + "api/trips/", trip);
     }
 
@@ -57,7 +56,7 @@ export class RestService {
     }
 
     public updateUser(user):Promise<any>{
-        return this.http.put(environment.baseApiUrl + "api/users/", user).toPromise();
+        return this.POST(environment.baseApiUrl + "api/users/"+user.id+"/", user);
     }
 
     public declareGuide(tripId:String, guideId:String):Promise<any> {
@@ -65,7 +64,7 @@ export class RestService {
     }
 
     public removeDeclarationGuide(tripId:String, guideId:String): Promise<any> {
-        return this.http.delete(environment.baseApiUrl + "api/orders?tripId="+tripId +"&userId="+guideId).toPromise();
+        return this.http.delete(environment.baseApiUrl + "api/orders/", {method : "DELETE", body: {tripId:tripId, userId:guideId}}).toPromise();
     }
 
     public getUserById(id:String):Promise<any> {

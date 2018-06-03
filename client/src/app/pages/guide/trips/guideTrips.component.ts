@@ -51,7 +51,6 @@ export class GuideTripsComponent implements OnInit {
         this.trips = [];
         this.rest.getAllTrips()
         .then(t => {
-            console.log(t)
             for(let tr of t){
                 if(!tr.guides || tr.guides[0] !== this.auth.getLoggedUser().id) continue;
                 
@@ -75,19 +74,16 @@ export class GuideTripsComponent implements OnInit {
                         this.trips.push(td);
                     })
                     .catch( e => {
-                        console.log(e);
                         return e;
                     })
                 })
                 .catch( e => {
-                    console.log(e);
                     return e;
                 })
                 
             }
         })
         .catch(e => {
-            console.log(e)
             this.trips = [];
         })
     }

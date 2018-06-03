@@ -32,8 +32,6 @@ export class AllTripsComponent implements OnInit {
         this.trips = [];
         this.rest.getUsersTrip(this.auth.getLoggedUser().id)
         .then(t => {
-            console.log("FEACH")
-            console.log(t)
             for(let tr of t){
                 this.rest.getPlaceById(tr.places[0])
                 .then( d => {
@@ -46,19 +44,15 @@ export class AllTripsComponent implements OnInit {
                             photoref: d.photoRef
                         }
                     }
-                    console.log("TRIPDETAILS")
-                    console.log(d);
                     this.trips.push(td);
                 })
                 .catch( e => {
-                    console.log(e);
                     return e;
                 })
                 
             }
         })
         .catch(e => {
-            console.log(e)
             this.trips = [];
         })
     }

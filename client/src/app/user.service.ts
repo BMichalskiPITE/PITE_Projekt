@@ -15,7 +15,6 @@ export class UserService {
   logged:LoggedUser;
   constructor(private http: HttpClient, private global: GlobalState) {
     this.global.subscribe("loggedUser", user =>{
-      console.log("logged user test");
       this.logged = user;
     });
   }

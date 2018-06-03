@@ -98,12 +98,10 @@ export class TripDetailsComponent implements OnInit, OnDestroy {
               places: [],
               guides: []
           }
-          console.log(this.details)
              for(let tr of t.places){
                  this.rest.getPlaceById(tr)
                  .then(pl => this.details.places.push(pl))
                  .catch( e => {
-                     console.log(e);
                      return e;
                  })
              }
@@ -111,13 +109,11 @@ export class TripDetailsComponent implements OnInit, OnDestroy {
               this.rest.getUser(tr)
               .then(pl => this.details.guides.push(pl))
               .catch( e => {
-                  console.log(e);
                   return e;
               })
           }
          })
          .catch(e => {
-             console.log(e)
              this.details = undefined;
          })
       });

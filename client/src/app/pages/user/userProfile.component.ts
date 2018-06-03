@@ -38,7 +38,7 @@ export class UserProfileComponent implements OnInit{
   
   guide(v){
     this.user.is_guide = v;
-    this.rest.updateUser(this.user);
+    this.rest.updateUser(this.user).then(e => this.authService.setLoggedUser(this.user))
   }
 
 
@@ -57,7 +57,7 @@ setStar(data:any){
      this.user.gradesSum += this.rating;
      this.user.gradesNumber += 1; 
 
-     this.rest.updateUser(this.authService.getLoggedUser()); 
+     this.rest.updateUser(this.user); 
  }
 
   getGrade():string {
