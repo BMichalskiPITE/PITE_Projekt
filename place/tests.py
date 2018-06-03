@@ -85,3 +85,8 @@ class PlaceTestCase(APITestCase):
         }
         serializer = PlaceSerializer(data=data)
         self.assertEqual(serializer.is_valid(), True)
+
+    def test_get_sync_places(self):
+        data = {}
+        response = self.client.get('/api/sync/places/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
