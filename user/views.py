@@ -76,10 +76,6 @@ class UserRudView(generics.RetrieveUpdateDestroyAPIView):
             else:
                 return JsonResponse({'form':'is not valid'}, status=422)
 
-        else:
-            user = User.objects.filter(rate = "None")
-            serializer = TripSerializer(user, many = True)
-            return JsonResponse(serializer.data, safe = False)
 
 
 class MessagesView(mixins.CreateModelMixin, generics.ListAPIView):
