@@ -46,6 +46,37 @@ class PlaceTestCase(APITestCase):
         response = self.client.get(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_post_rudview_user_correct(self):
+        user = User_model.objects.first()
+        data = {
+            'mail' : 'None',
+            'id'   : '13',
+            'username' : 'None',
+            'imageUrl' : 'None',
+            'is_guide' : 'True',
+            'gradesNumber' : 1,
+            'gradesSum' : 5,
+        }
+        url = user.get_api_url()
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code,200)
+
+    def test_post_rudview_user_bad_id(self):
+        user = User_model.objects.first()
+        data = {
+            'mail' : 'None',
+            'id'   : '15',
+            'username' : 'None',
+            'imageUrl' : 'None',
+            'is_guide' : 'False',
+            'gradesNumber' : 1,
+            'gradesSum' : 5,
+        }
+        url = user.get_api_url()
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'no users with this ID'})
+
     def test_get_update_user(self):
         user = User_model.objects.first()
         data = {'id':'344034sf', 'is_guide':True}

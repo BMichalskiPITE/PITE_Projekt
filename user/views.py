@@ -45,7 +45,7 @@ class UserRudView(generics.RetrieveUpdateDestroyAPIView):
             user = User.objects.all()
             form = AnnounceUserForm(request.data)
             if form.is_valid():
-                user.filter(Q(id__icontains=form.clean_id()))
+                user = user.filter(Q(id__icontains=form.clean_id()))
                 if user.count() > 0:
                     user = user[0]
                 else:
