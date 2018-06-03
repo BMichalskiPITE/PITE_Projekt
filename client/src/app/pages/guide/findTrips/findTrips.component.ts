@@ -49,8 +49,6 @@ export class FindTripsComponent implements OnInit {
         this.trips = [];
         this.rest.getTripsToGuide()
         .then(t => {
-            console.log("FEACH")
-            console.log(t)
             for(let tr of t){
                 if(tr.guides.length > 0) continue;
                 this.rest.getPlaceById(tr.places[0])
@@ -74,19 +72,16 @@ export class FindTripsComponent implements OnInit {
                         this.trips.push(td);
                     })
                     .catch( e => {
-                        console.log(e);
                         return e;
                     })
                 })
                 .catch( e => {
-                    console.log(e);
                     return e;
                 })
                 
             }
         })
         .catch(e => {
-            console.log(e)
             this.trips = [];
         })
     }

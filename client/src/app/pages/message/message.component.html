@@ -1,26 +1,50 @@
 <nb-card>
-  <div>
-    <button (click)="refresh()">Refresh</button>
-    <div>
-      <div *ngFor="let message of messages">
-        <div class="message">
-          <div>From {{message.fromUserId}} to {{message.toUserId}}</div>
-          <div>{{message.message}}</div>
+  <nb-card-header>
+    Inbox
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-default" (click)="refresh()">Reload</button>
+        <div *ngFor="let message of messages" class="message">
+          <div class="row">
+            <div class="col-md-6">
+              <div>From {{message.fromUsername}} to {{message.toUsername}}</div>
+            </div>
+            <div class="col-md-6">
+              <div class="pull-right">{{message.date}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h5>{{message.message}}</h5>
+            </div>
+          </div>
+          <hr>
+          <br>
+        </div>
+        <div *ngIf="!messages || messages.length === 0">
+          <br>
+          <div class="alert alert-info" role="alert">
+            <b>You don't have any messages</b>
+          </div>
         </div>
       </div>
+      <div class="col-md-6">
+        <h5>New message</h5>
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label>To: </label>
+            <select [(ngModel)]="toUserId" name="toUserId">
+              <option *ngFor="let user of users" value={{user.id}}>{{user.username}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" rows="6" cols="10" [(ngModel)]="message" name="message"></textarea>
+          </div>
+          <button class="btn btn-default" type="submit">Send</button>
+        </form>
+      </div>
     </div>
-    <hr>
-    <form (ngSubmit)="onSubmit()">
-      <div>
-        <label>To: </label>
-        <select [(ngModel)]="toUserId" name="toUserId">
-          <option *ngFor="let user of users" value={{user.id}}>{{user.username}}</option>
-        </select>
-      </div>
-      <div>
-        <textarea class="form-control" rows="6" cols="10" [(ngModel)]="message" name="message"></textarea>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+  </nb-card-body>
 </nb-card>

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User,Message
+from pprint import pprint
 
 class UserSerializer(serializers.ModelSerializer):
     url         = serializers.SerializerMethodField(read_only = True)

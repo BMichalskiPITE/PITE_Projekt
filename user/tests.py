@@ -46,6 +46,37 @@ class PlaceTestCase(APITestCase):
         response = self.client.get(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_post_rudview_user_correct(self):
+        user = User_model.objects.first()
+        data = {
+            'mail' : 'None',
+            'id'   : '13',
+            'username' : 'None',
+            'imageUrl' : 'None',
+            'is_guide' : 'True',
+            'gradesNumber' : 1,
+            'gradesSum' : 5,
+        }
+        url = user.get_api_url()
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code,200)
+
+    def test_post_rudview_user_bad_id(self):
+        user = User_model.objects.first()
+        data = {
+            'mail' : 'None',
+            'id'   : '15',
+            'username' : 'None',
+            'imageUrl' : 'None',
+            'is_guide' : 'False',
+            'gradesNumber' : 1,
+            'gradesSum' : 5,
+        }
+        url = user.get_api_url()
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code,422)
+        self.assertJSONEqual(str(response.content, encoding= 'utf8'), {'form': 'no users with this ID'})
+
     def test_get_update_user(self):
         user = User_model.objects.first()
         data = {'id':'344034sf', 'is_guide':True}
@@ -58,6 +89,16 @@ class PlaceTestCase(APITestCase):
         url = reverse("users-list")
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_get_list_message(self):
+        data = {}
+        url = reverse("messages-list")
+        response = self.client.get(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response = self.client.get('/api/messages/?id=13')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response = self.client.get('/api/messages/?userId=13')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_apps(self):
         self.assertEqual(UserConfig.name,'user')

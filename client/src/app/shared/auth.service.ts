@@ -45,7 +45,7 @@ export class AuthService {
                 }
                 this.loggedUser.next(userek);
             })
-            .catch( r3 => this.loggedUser.next(user))
+            .catch(e=>e)
         );
     }
 

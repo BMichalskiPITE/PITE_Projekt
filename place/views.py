@@ -5,6 +5,8 @@ from .serializers import PlaceSerializer
 from django.db.models import Q
 from .forms import PlaceForm
 from django.http import JsonResponse
+from django.apps import apps
+from .apps import PlaceConfig
 import urllib.request, json 
 import time
 
@@ -44,16 +46,19 @@ class PlaceRudView(generics.RetrieveUpdateDestroyAPIView):
 
 class PlaceSyncView(viewsets.ViewSet):
 
+    search_place = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={0}&radius={1}&type={2}&key={3}"
+    serach_place_next_page = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key={0}&pagetoken="
+
     def sync(self, request):
         debug = []
-        gmaps_api_key = "AIzaSyDXJPkrTmAaD6AhH_7vFHBYxOEB1KZdqWo"
-        gmaps_location = "50.062533,19.93732"
-        gmaps_radius = "15000"
-        gmaps_type = "museum"
-        gmaps_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={0}&radius={1}&type={2}&key={3}".format(gmaps_location,gmaps_radius,gmaps_type,gmaps_api_key)
-        gmaps_next_page_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key={0}&pagetoken=".format(gmaps_api_key)
-        max_pages = 5
-        interval_sec = 3
+        gmaps_api_key = PlaceConfig.google_maps_api_key
+        gmaps_location = PlaceConfig.google_maps_sync_location
+        gmaps_radius = PlaceConfig.google_maps_sync_radius
+        gmaps_type = PlaceConfig.google_maps_sync_type
+        gmaps_url = self.search_place.format(gmaps_location,gmaps_radius,gmaps_type,gmaps_api_key)
+        gmaps_next_page_url = self.serach_place_next_page.format(gmaps_api_key)
+        max_pages = PlaceConfig.google_maps_sync_max_pages
+        interval_sec = PlaceConfig.google_maps_interval_sec
 
         debug.append(gmaps_url)
 

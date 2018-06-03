@@ -1,6 +1,6 @@
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
     <agm-marker *ngFor="let o of places"[latitude]="o.latitude" [longitude]="o.longitude">
-        <agm-info-window [isOpen]=true>
+        <agm-info-window [isOpen]="opened(o)">
             <p>{{o.name}}</p>
             <p>{{o.vicinty}}</p>
             <p *ngIf="!isSelected(o) && selectable" (click)="selectPlace(o)">Select</p>

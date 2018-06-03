@@ -25,7 +25,6 @@ export class MapComponent implements OnInit {
     this.placesService.getPlaces()
       .then(
         data => { 
-        console.log(data);
         this.places = data;
       }).catch(
       error => alert('Error when loading data: ' + JSON.stringify(error))
@@ -44,9 +43,10 @@ export class MapComponent implements OnInit {
 
   selectPlace(place:Place):void {
     this.onSelect.emit(place);
-    console.log(this.selectedIds);
   }
-
+  opened(o):boolean {
+    return this.places.findIndex(e => e==o) < 5;
+  }
 }
 
 

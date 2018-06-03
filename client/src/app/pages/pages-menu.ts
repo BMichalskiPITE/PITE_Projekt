@@ -71,7 +71,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Messages',
-    icon: 'nb-inbox',
+    icon: 'nb-email',
     link: '/messages'
   }
 ];

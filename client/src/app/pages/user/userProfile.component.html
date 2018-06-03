@@ -8,10 +8,10 @@
                 <img src = "{{images[index]}}" class="col-md-4 bg_blur "/>
                 <div class="col-md-8  col-xs-12" align="center">
                     <br>
-                   <img src="{{user.imageUrl}}" class="img-thumbnail picture hidden-xs" />
+                   <img src="{{user?.imageUrl}}" class="picture" />
                    <div class="header" >
-                        <h1>{{user.username}}</h1>
-                        <h4>{{user.mail}}</h4>
+                        <h1>{{user?.username}}</h1>
+                        <h4>{{user?.mail}}</h4>
                         <br>
                         <span>Global grade: {{getGrade()}} stars!</span>
                         <br><br>

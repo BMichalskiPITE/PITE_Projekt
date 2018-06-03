@@ -27,7 +27,6 @@ export class PagesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.auth.subscribeLoggedUser().subscribe(
       newLogged => {
-        console.log('update' + newLogged);
         this.updateMenuVisibility(newLogged);
       }
     )
